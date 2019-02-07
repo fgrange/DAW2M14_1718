@@ -1,0 +1,50 @@
+#containerr {
+    width: 660px;
+    height: 10px;
+    margin: 50px auto;
+/*    border: 2px solid #666;
+    border-radius: 1.5px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075)inset, 0 0 6px rgba(0, 0, 0, 0.6);*/
+    
+}
+
+#containerr2 {
+    width: 368px;
+    height: 327px;
+    margin: auto;
+ 
+    border: 2px solid #666;
+    border-radius: 1.5px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075)inset, 0 0 6px rgba(0, 0, 0, 0.6);
+    
+}
+
+
+
+.darkColor {
+	background-color: #666;
+	color: #ccc;
+}
+
+
+
+
+.llista {
+    padding: 8px;
+    width: 180px;
+ 
+}
+
+.llista2 {
+    padding: 8px;
+    width: 180px;
+}
+
+
+
+.butons {
+    padding: 2.8px;
+    width: 40px;
+    
+ 
+}

@@ -1,0 +1,40 @@
+.sidenav {
+    height: 100%;
+    /*width: 11%;*/
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 10px;
+    transition: 0.5s;
+    width: 14%;
+    position: relative;
+    float:left;
+    margin-top: -20px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+#topNavBar{
+    position:relative;
+    width: 100%;
+    float:left;
+}
+.main{
+/*    margin-top:4.5rem;
+    margin-left: 200px;*/
+    padding-top: 7px;
+    position:relative;
+    float:left;
+    width: 85%;
+    max-width: 85%;
+    height:100%;
+    padding-right: 0px;
+}
