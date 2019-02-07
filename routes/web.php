@@ -22,7 +22,7 @@
 
 
 Route::get('/', function () {
-    return view('CU01_login');
+    return view('welcome');
 });
 
 // CU01
