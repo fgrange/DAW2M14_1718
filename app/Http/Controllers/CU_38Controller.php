@@ -26,7 +26,7 @@ class CU_38Controller extends Controller {
             //Si existe algun usuario de grupo entra
             if ($usuariGrup !== null) {
 
-                //Elimina tots els usuaris del grup per la seva id
+                //Elimina tots els usuaris del grup per la seva id.
                 usuariGrup::where('idGrup', $request->input("idGrupEliminar"))->delete();
             }
             $grup->delete();
