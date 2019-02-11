@@ -40,7 +40,7 @@
                 <td class="col-md-1"></td>
                 <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#descargarModal" data-book-id="{{$carpeta->idCarpeta}}" data-book-nombre="{{$carpeta->nom}}" data-book-path="{{$carpeta->path}}"><span class="glyphicon glyphicon-cloud-download"></button></td>
                 <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gestionarPermisosModal" data-book-id="{{$carpeta->idCarpeta}}" data-book-nombre="{{$carpeta->nom}}"><span class="glyphicon glyphicon-lock"></button></td>
-                <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modificarModal" data-book-id="{{$carpeta->idCarpeta." carpeta"}}" data-book-ultimamod="{{$carpeta->dataModificacio}}" data-book-nombre="{{$carpeta->nom}}" data-book-descripcion="{{$carpeta->descripcio}}"><span class="glyphicon glyphicon-wrench"></button></td>
+                <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modificarModal" data-book-id="{{$carpeta->idCarpeta." carpeta"}}" data-book-ultimamod="{{$carpeta->dataModificacio}}" data-book-nombre="{{$carpeta->nom}}" data-book-descripcion="{{$carpeta->descripcio}}" data-book-idUsuari="{{$carpeta->idUsuari}}"><span class="glyphicon glyphicon-wrench"></button></td>
                 <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#moureCarpetaModal" data-book-id="{{$carpeta->idCarpeta}}" data-book-name="{{$totesCarpetes}}"><span class="glyphicon glyphicon-new-window"></button></td>
                 <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#borrarModal" data-book-id="{{$carpeta->idCarpeta." carpeta"}}" data-book-name="{{$carpeta->nom}}"><span class="glyphicon glyphicon-trash"></button></td>
             </tr>
@@ -172,7 +172,7 @@
                       <b>Propietari: </b></br>
                       <p id="propietari">Ningú</p>
                       <b>Modificat per: </b></br>
-                      <p id="modificatPer">Ningú</p>
+                      <p id="idUsuari" name="idUsuari">{{$_SESSION['nomUsuari']}}</p>
                       <b>Ultima modificacio: </b></br>
                       <p id="ultimaModificacio">No s'ha modificat</p>
                   </div>
@@ -196,7 +196,7 @@
                   <div class="modal-body">
                       <h4>Carpetes:</h4>
                       <div id="listaCarpeta"></div>
-                      <b>Nom de la carpeta destinatari: </b><input id="nombreMovCarpeta" name="nombreMovCarpeta" type="text" class="form-control">
+                      <b>Nom de la carpeta destinatari: </b><input id="nombreMovCarpeta" name="nombreMovCarpeta" type="text" class="form-control" disabled >
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -219,7 +219,7 @@
                   <div class="modal-body">
                       <h4>Carpetes:</h4>
                       <div id="listaCarpetaD"></div>
-                      <b>Nom de la carpeta destinatari: </b><input id="nombreMovDocumento" name="nombreMovDocumento" type="text" class="form-control">
+                      <b>Nom de la carpeta destinatari: </b><input id="nombreMovDocumento" name="nombreMovDocumento" type="text" class="form-control" disabled >
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -598,11 +598,13 @@
                 var nombre = $(e.relatedTarget).data('book-nombre');
                 var descripcion = $(e.relatedTarget).data('book-descripcion');
                 var ultimaModificacio = $(e.relatedTarget).data('book-ultimamod');
+                var modificatPer = $(e.relatedTarget).data('book-idUsuari');
                 /*var propietari=$('#propietari').text();
                 var modificatPer=$('#modificatPer').text();*/
                 $('#nombreInput').val(nombre);
                 $('#descripcionInput').val(descripcion);
                 $('#ultimaModificacio').text(ultimaModificacio);
+                $('#modificatIput').text(modificatPer);
                 
                 $('#modalFormModificar').attr('action', '../modificarCarpeta/'+id);
             });

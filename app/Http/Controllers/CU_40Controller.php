@@ -13,13 +13,13 @@ class CU_40Controller extends Controller {
     public function afegirGrup(Request $request) {
         
         //Buscamos grupo con ese nombre
-        $grup = Grup::where('nom', $request->nom_Grup)->first();
-        $nomGrup = $request->nom_Grup;
+        $grup = Grup::where('nom', $request->input("nom_Grup"))->first();//Posat input en el request, by Demetrio Campos
+        $nomGrup = $request->input("nom_Grup");//Posat input en el request, by Demetrio Campos
 
         //Si no existe grupo con ese nombre entra y crea grupo
         if ($grup == null) {
             $grup = new Grup;
-            $grup->nom = $request->nom_Grup;
+            $grup->nom = $request->input("nom_Grup");//Posat input en el request, by Demetrio Campos
             $grup->dataCreacio = date('Y-m-d');
             $grup->dataModificacio = date('Y-m-d');
             $grup->save();

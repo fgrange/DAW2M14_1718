@@ -18,7 +18,6 @@ class CU_38Controller extends Controller {
 
         //Guarda dades per tornar a crear el grup
         $dataCreacioGrup = $grup->dataCreacio;
-        $idGrup = $grup->idGrup;
         $nomGrup = $grup->nom;
 
         //Si existe grupo con ese id entra
@@ -27,21 +26,14 @@ class CU_38Controller extends Controller {
             //Si existe algun usuario de grupo entra
             if ($usuariGrup !== null) {
 
-                //Crea array con usuarios del grupo
-                $arrayUsuarisGrup = UsuariGrup::where('idGrup', $idGrup)->get();
-
-                //Recorre usuarios grupo y los elimina
-                foreach ($arrayUsuarisGrup as $idUsuariGrup) {
-                    $usuariGrup2 = UsuariGrup::where('idGrup', $idUsuariGrup->idGrup)->first();
-                    $usuariGrup2->delete();
-                }
+                //Elimina tots els usuaris del grup per la seva id.
+                usuariGrup::where('idGrup', $request->input("idGrupEliminar"))->delete();
             }
             $grup->delete();
 
             //Crea nuevo grupo
-            $grupMod = new Grup;
-            $grupMod->idGrup = $idGrup;
-            $grupMod->nom = $request->nom_Grup_Modificar;
+            $grupMod = $grup;
+            $grupMod->nom = $request->input("nom_Grup_Modificar");
             $grupMod->dataCreacio = $dataCreacioGrup;
             $grupMod->dataModificacio = date('Y-m-d');
             $grupMod->save();
