@@ -196,7 +196,7 @@
                   <div class="modal-body">
                       <h4>Carpetes:</h4>
                       <div id="listaCarpeta"></div>
-                      <b>Nom de la carpeta destinatari: </b><input id="nombreMovCarpeta" name="nombreMovCarpeta" type="text" class="form-control">
+                      <b>Nom de la carpeta destinatari: </b><input id="nombreMovCarpeta" name="nombreMovCarpeta" type="text" class="form-control" disabled >
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -219,7 +219,7 @@
                   <div class="modal-body">
                       <h4>Carpetes:</h4>
                       <div id="listaCarpetaD"></div>
-                      <b>Nom de la carpeta destinatari: </b><input id="nombreMovDocumento" name="nombreMovDocumento" type="text" class="form-control">
+                      <b>Nom de la carpeta destinatari: </b><input id="nombreMovDocumento" name="nombreMovDocumento" type="text" class="form-control" disabled >
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

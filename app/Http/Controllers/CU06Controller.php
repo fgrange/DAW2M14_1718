@@ -23,9 +23,15 @@ class CU06Controller extends Controller
         if (strlen($request->contrasenya)>0):
             $user->contrasenya = $request->contrasenya;
         endif;
-        $user->nom = $request->nom;
-        $user->cognoms = $request->cognoms;
-        $user->email = $request->email;
+        if (strlen($request->nom)>0):
+            $user->nom = $request->nom;
+        endif;
+        if (strlen($request->cognoms)>0):
+            $user->cognoms = $request->cognoms;
+        endif;
+        if (strlen($request->emal)>0):
+            $user->email = $request->email;
+        endif;
         $user->dadesPostals = $request->dadesPostals;
         $user->save();
         

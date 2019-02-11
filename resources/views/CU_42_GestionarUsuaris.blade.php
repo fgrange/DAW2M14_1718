@@ -23,7 +23,7 @@
         <label class="col-md-5">Accions</label>
     </div>
 
-    @foreach( $usuaris as $usuari )
+    @foreach( $users as $usuari )
     <div class="rowRegistro">
         <label class="col-md-4">{{ $usuari->nom }} {{ $usuari->cognoms }}</label>
         <label class="col-md-3">{{ $usuari->nomUsuari }}</label>
