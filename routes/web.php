@@ -56,11 +56,11 @@ Route::get('/resultadoBusqueda', 'CU_05Controller@buscarDocuments');
 // CU06
 //Comentario Javi Millan
 //Comentario Sergio Plaza
-Route::get("/editarPerfil", "CU06Controller@getEditarPerfil");
+Route::get("/editarPerfil", "CU06Controller@getEditarPerfil")->name('editarPerfil');
 Route::post("/editarPerfil/edit", "CU06Controller@editarPerfilEdit"); //->middleware('auth');
 //
 // CU07
-Route::get('/abrirCarpeta/{id}', 'CU_07Controller@abrirCarpeta');
+Route::get('/abrirCarpeta/{id}', 'CU_07Controller@abrirCarpeta')->name('abrirCarpeta');
 //
 //
 // CU08

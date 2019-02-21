@@ -15,12 +15,12 @@
     -->
     <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-            <li>
+            <li class="{{ Route::currentRouteNamed('abrirCarpeta') ? 'active' : '' }}">
                 <!-- class="active" -->
                 <a class="nav-link" href="{{url('/abrirCarpeta/public')}}">Public<span class="sr-only">(current)</span></a>
             </li>
-            <li>
-                <a href="{{url('/editarPerfil/')}}">Editar perfil</a>
+            <li class="{{ Route::currentRouteNamed('editarPerfil') ? 'active' : '' }}">
+                <a class="{{ Request::is('/*') ? 'active' : '' }}" href="{{url('/editarPerfil/')}}">Editar perfil</a>
             </li>
             <li>
                 <a href="{{url('/CU_51/')}}">Logout</a>

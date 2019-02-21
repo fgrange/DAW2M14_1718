@@ -12,6 +12,7 @@
         para que cada uno pudiera aplicar cambios de diseño? -->
         <link href="{{ url('css/CU_02.css')}}" rel="stylesheet" type="text/css"/>
         <link href="{{ url('css/CU_36.css')}}" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="{{ url('css/layout.css')}}">
 
         <script src="{{ url('js/bootstrap.min.js')}}"></script>
 

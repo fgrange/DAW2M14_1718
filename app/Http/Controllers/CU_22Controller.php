@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Carpeta;
 use App\Logs;
 use Notification;
+use App\Usuari;
 
 class CU_22Controller extends Controller {
 
@@ -19,7 +20,8 @@ class CU_22Controller extends Controller {
             $carpeta->nom = $request->nombreInput;
             $carpeta->descripcio = $request->descripcioInput;
             $carpeta->dataModificacio = date('Y-m-d');
-            $carpeta->save();
+            $carpeta->idUsuari = $request->modificatInput;
+            
             $log = new Logs;
             $log->idUsuari = $_SESSION['idUsuari'];
             $log->descripcio = "Usuari ".$_SESSION['nom']." modifica la id ".$id.".";
@@ -27,6 +29,8 @@ class CU_22Controller extends Controller {
             $log->hora = date('H:i:s');
             $log->path = "";
             $log->save();
+            $carpeta->idUsuari=$log->idUsuari;
+            $carpeta->save();
         }else{
             Notification::error("No tens permisos per realitzar aquesta acció.");
         }
