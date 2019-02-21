@@ -49,12 +49,12 @@
 <script src="{{ url('/js/jquery.min.js') }}"></script>
 <script src="{{ url('/js/bootstrap.min.js') }}"></script>
 <script>
-var urlNew = "http://localhost/DAW2M14/public/CU_52_CrearUsuari";
-var urlEdit = "http://localhost/DAW2M14/public/CU_45_ModificarUsuari?id=";
-var urlDelete = "http://localhost/DAW2M14/public/CU_43_EliminarUsuari?id=";
-var urlAlta = "http://localhost/DAW2M14/public/CU_47_AltaUsuari?id=";
-var urlBaixa = "http://localhost/DAW2M14/public/CU_44_BaixaUsuari?id=";
-var urlModPerGrups = "http://localhost/DAW2M14/public/CU_46_ModificarPertinencaGrups?id=";
+var urlNew = "{{ url('CU_52_CrearUsuari')}}";
+var urlEdit = "{{ url('CU_45_ModificarUsuari?id=')}}";
+var urlDelete = "{{ url('CU_43_EliminarUsuari?id=')}}";
+var urlAlta = "{{ url('CU_47_AltaUsuari?id=')}}";
+var urlBaixa = "{{ url('CU_44_BaixaUsuari?id=')}}";
+var urlModPerGrups = "{{ url('CU_46_ModificarPertinencaGrups?id=')}}";
 var iduser;
 var mostrar;
 
@@ -89,7 +89,7 @@ $("button[name='modalButtonDelete']").click(function() {
                 $('#miModalDelete').modal('show');
             })
             .fail(function() {
-                alert('Error.....');
+                alert('Error: boto eliminar usuari');
             })
             .always(function() {
                 //alert('Fi');
@@ -99,12 +99,12 @@ $("button[name='modalButtonDelete']").click(function() {
 $('#modalButtonNew').click(function() {
     $.get(urlNew)
             .done(function(data) {
-                //$('#cu52_idUsuari').val(data[0][0].idUsuari);
+                $('#cu52_idUsuari').val(data[0][0].idUsuari);
                 $('#modalButtonNew').modal('toggle');
                 $('#miModalNew').modal('show');
             })
             .fail(function() {
-                alert('Error.....');
+                alert('Error: boto crear nou usuari');
             })
             .always(function() {
                 //alert('Fi');
@@ -132,7 +132,7 @@ $("button[name='modalButtonAlta']").click(function() {
                 $('#miModalAlta').modal('show');
             })
             .fail(function() {
-                alert('Error.....');
+                alert('Error: boto alta');
             })
             .always(function() {
                 //alert('Fi');
@@ -160,7 +160,7 @@ $("button[name='modalButtonBaixa']").click(function() {
                 $('#miModalBaixa').modal('show');
             })
             .fail(function() {
-                alert('Error.....');
+                alert('Error: boto baixa');
             })
             .always(function() {
                 //alert('Fi');
@@ -174,7 +174,7 @@ $(document).on("click", "button[name='modalButtonEdit']", function() {
                 editModal(data);
             })
             .fail(function() {
-                alert('Error.....');
+                alert('Error: boto editar');
             })
             .always(function() {
                 //alert('Fi');
@@ -264,4 +264,3 @@ $(document).ready(function() {
 
 </script>
 @endsection
-
