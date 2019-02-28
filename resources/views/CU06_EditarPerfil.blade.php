@@ -9,7 +9,7 @@
 
     <div class="form-group">
       <label for="nomUsuari">Nom usuari:</label>
-      <input type="text" class="form-control" name="nomUsuari" id="nomUsuari" value="{{$usuari->nomUsuari}}">
+      <input type="text" class="form-control" name="nomUsuari" id="nomUsuari" value="{{$usuari->nomUsuari}}" required>
     </div>
     <div class="form-group">
       <label for="contrasenya">Nova contrasenya:</label>
@@ -17,15 +17,15 @@
     </div>
     <div class="form-group">
       <label for="cognoms">Nom:</label>
-      <input type="text" class="form-control" name="nom" id="nom" value="{{$usuari->nom}}">
+      <input type="text" class="form-control" name="nom" id="nom" value="{{$usuari->nom}}" required>
     </div>
     <div class="form-group">
       <label for="cognoms">Cognoms:</label>
-      <input type="text" class="form-control" name="cognoms" id="cognoms" value="{{$usuari->cognoms}}">
+      <input type="text" class="form-control" name="cognoms" id="cognoms" value="{{$usuari->cognoms}}" required>
     </div>
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="email" class="form-control" name="email" id="email" value="{{$usuari->email}}">
+      <input type="email" class="form-control" name="email" id="email" value="{{$usuari->email}}" required>
     </div>
     <div class="form-group">
       <label for="dadesPostals">Dades postals:</label>

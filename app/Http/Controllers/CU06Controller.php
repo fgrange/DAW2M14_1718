@@ -19,30 +19,36 @@ class CU06Controller extends Controller
     {   
         session_start();
         $user = Usuari::find($_SESSION['idUsuari']);
-        $user->nomUsuari = $request->nomUsuari;
-        if (strlen($request->contrasenya)>0):
-            $user->contrasenya = $request->contrasenya;
-        endif;
-        if (strlen($request->nom)>0):
-            $user->nom = $request->nom;
-        endif;
-        if (strlen($request->cognoms)>0):
-            $user->cognoms = $request->cognoms;
-        endif;
-        if (strlen($request->emal)>0):
-            $user->email = $request->email;
-        endif;
-        $user->dadesPostals = $request->dadesPostals;
-        $user->save();
+
         
-        $log = new Logs;
-        $log->idUsuari = $_SESSION['idUsuari'];
-        $log->descripcio = "Usuari ".$request->nomUsuari." modificat.";
-        $log->dataLog = date('Y-m-d');
-        $log->hora = date('H:i:s');
-        $log->path = "";
-        $log->save();
-        
-        return redirect(url('/abrirCarpeta/root'));
+            if (strlen($request->nomUsuari)>0):
+                $user->nomUsuari = $request->nomUsuari;
+            endif;
+            if (strlen($request->contrasenya)>0):
+                $user->contrasenya = $request->contrasenya;
+            endif;
+            if (strlen($request->nom)>0):
+                $user->nom = $request->nom;
+            endif;
+            if (strlen($request->cognoms)>0):
+                $user->cognoms = $request->cognoms;
+            endif;
+            if (strlen($request->emal)>0):
+                $user->email = $request->email;
+            endif;
+            $user->dadesPostals = $request->dadesPostals;
+            $user->save();
+
+            $log = new Logs;
+            $log->idUsuari = $_SESSION['idUsuari'];
+            $log->descripcio = "Usuari ".$request->nomUsuari." modificat.";
+            $log->dataLog = date('Y-m-d');
+            $log->hora = date('H:i:s');
+            $log->path = "";
+            $log->save();
+            
+       
+            return redirect(url('/abrirCarpeta/root'));
+
     }
 }
