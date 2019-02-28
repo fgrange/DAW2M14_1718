@@ -47,7 +47,7 @@
                     <div class="form-group">
                         <label for="dadesPostals" class="col-sm-3 control-label">Dades Postals:</label>
                         <div class="col-sm-9">
-                            <input type="text" name="cu_52dadesPostals" id="cu_52dadesPostals" class="form-control" placeholder="Dades Postals"  value="" required />
+                            <input type="text" name="cu_52dadesPostals" id="cu_52dadesPostals" class="form-control" placeholder="Dades Postals"  value="" />
                         </div>
                     </div>
                     <div class="form-group">

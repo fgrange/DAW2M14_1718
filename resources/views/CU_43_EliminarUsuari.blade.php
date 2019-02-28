@@ -14,51 +14,51 @@
                     <div class="form-group">
                         <label for="nomUsuari" class="col-sm-3 control-label">Nom Usuari:</label>
                         <div class="col-sm-9">
-                            <input type="text" name="cu43_nomUsuari" id="cu43_nomUsuari" class="form-control" placeholder="Nom Usuari" value="" required />
+                            <input type="text" name="cu43_nomUsuari" id="cu43_nomUsuari" class="form-control" placeholder="Nom Usuari" value="" disabled />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="contrasenya" class="col-sm-3 control-label">Contrasenya:</label>
                         <div class="col-sm-9">
-                            <input type="password" name="cu43_contrasenya" id="cu43_contrasenya" class="form-control" placeholder="Contrasenya" value="" required />
+                            <input type="password" name="cu43_contrasenya" id="cu43_contrasenya" class="form-control" placeholder="Contrasenya" value="" disabled />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="nom" class="col-sm-3 control-label">Nom:</label>
                         <div class="col-sm-9">
-                            <input type="text" name="cu43_nom" id="cu43_nom" class="form-control" placeholder="Nom" value="" required />
+                            <input type="text" name="cu43_nom" id="cu43_nom" class="form-control" placeholder="Nom" value="" disabled />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="cognoms" class="col-sm-3 control-label">Cogmons:</label>
                         <div class="col-sm-9">
-                            <input type="text" name="cu43_cognoms" id="cu43_cognoms" class="form-control" placeholder="Cognoms" value="" required />
+                            <input type="text" name="cu43_cognoms" id="cu43_cognoms" class="form-control" placeholder="Cognoms" value="" disabled />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="email" class="col-sm-3 control-label">Email:</label>
                         <div class="col-sm-9">
-                            <input type="email" name="cu43_email" id="cu43_email" class="form-control" placeholder="Email" value="" required />
+                            <input type="email" name="cu43_email" id="cu43_email" class="form-control" placeholder="Email" value="" disabled />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="dadesPostals" class="col-sm-3 control-label">Dades Postals:</label>
                         <div class="col-sm-9">
-                            <input type="text" name="cu43_dadesPostals" id="cu43_dadesPostals" class="form-control" placeholder="Dades Postals" value="" required />
+                            <input type="text" name="cu43_dadesPostals" id="cu43_dadesPostals" class="form-control" placeholder="Dades Postals" value="" disabled />
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Estat:</label>
                         <div class="col-sm-4">
                             <label class="radio-inline">
-                                <input type="radio" id="cu43_estat1" name="cu43_estat" value="1" required /> Alta
+                                <input type="radio" id="cu43_estat1" name="cu43_estat" value="1" disabled /> Alta
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" id="cu43_estat0" name="cu43_estat" value="0" required /> Baixa
+                                <input type="radio" id="cu43_estat0" name="cu43_estat" value="0" disabled /> Baixa
                             </label>
                         </div>
                         <div class="col-sm-5">
-                            <select id="cu43_tipus" name="cu43_tipus" class="form-control" required>
+                            <select id="cu43_tipus" name="cu43_tipus" class="form-control" disabled>
                                 <option value="" disabled selected>-- Tipus --</option>
                                 <option value="Estandar">Estandar</option>
                                 <option value="Administrador">Administrador</option>
@@ -68,9 +68,9 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Grups:</label>
                         <div id="cu43_grup" class="col-sm-5"></div>
-                        <div class="col-sm-4">
+                        {{-- <div class="col-sm-4">
                             <button type="submit" class="btn btn-primary" disabled>Modificar Grups</button>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
 

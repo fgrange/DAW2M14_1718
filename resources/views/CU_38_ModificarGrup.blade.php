@@ -17,7 +17,7 @@
                     </div>
                     <div class="modal-body">
                         <label for="nom_Grup_Modificar" class="ui-hidden-accessible">Nom: </label>
-                        <input type="text" name="nom_Grup_Modificar" id="nom_Grup_Modificar" class="form-control" placeholder="Nom del grup" value="" style="cursor: default;">
+                        <input type="text" name="nom_Grup_Modificar" id="nom_Grup_Modificar" class="form-control" placeholder="Nom del grup" value="" style="cursor: default;" required>
                         @include('CU_39_ModificarMembres')
                     </div>
                     <div class="modal-footer" style="text-align: center;">
