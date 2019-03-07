@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Usuari;
 use App\Logs;
+use App\Carpeta;
 use Krucas\Notification\Facades\Notification;
 
 class CU_52Controller extends Controller {
@@ -19,6 +20,7 @@ class CU_52Controller extends Controller {
         $usuari = Usuari::where('email', $request->cu_52email)
                         ->orwhere('nomUsuari', $request->cu_52nomUsuari)->first();
         $nlog = Logs::where('idLog', $request->cu52_idLog)->first();
+        $carpeta = new Carpeta;
 
         if ($usuari == null && $nlog == null) {
             $usuari = new Usuari;
@@ -33,6 +35,13 @@ class CU_52Controller extends Controller {
             $usuari->estat = $request->cu_52estat;
             $usuari->tipus = $request->cu_52tipus;
             $usuari->save();
+            
+            
+            //crear carpeta `privada usuari nou
+            $carpeta->nom = $request->cu_52nomUsuari;
+            $carpeta->dataCreacio = date('Y-m-d');
+            $carpeta->path = "privades/".$request->cu_52nomUsuari;
+            $carpeta->save();
 
             //Registrar Log
 
