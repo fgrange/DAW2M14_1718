@@ -22,7 +22,7 @@ class CU_23Controller extends Controller {
             $carpeta->descripcio = $request->descripcioCarpeta;
             $carpeta->dataCreacio = date('Y-m-d');
             $carpeta->dataModificacio = date('Y-m-d');
-            $carpeta->path = "pirula";
+            $carpeta->path = "privades/".$_SESSION["nomUsuari"];
             $carpeta->idCarpetaPare = $id;
             $carpeta->save();
             
