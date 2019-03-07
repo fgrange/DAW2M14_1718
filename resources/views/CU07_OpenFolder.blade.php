@@ -26,23 +26,30 @@
                         <option>Ordena per</option>
                     </select>
                 </td>
-            </tr>       
+            </tr>
         </table>
 
-        
-        <table class="table">
+
+        <table class="table tabla-carpetas">
             @foreach( $carpetes as $key => $carpeta)
             <tr>
-                <td class="col-md-1"><input type="checkbox" class="form-check-input"></td>
-                <td class="col-md-1"><a href="{{url('/abrirCarpeta/'.$carpeta->idCarpeta)}}"><span class="glyphicon glyphicon-folder-open"></span></a></td>
-                <td class="col-md-3"><a href="{{url('/abrirCarpeta/'.$carpeta->idCarpeta)}}"><b>{{$carpeta->nom}}</b><br>{{$carpeta->dataModificacio}}</a></td>
-                <td class="col-md-1"><span class="glyphicon glyphicon-info-sign"></span></td>
-                <td class="col-md-1"></td>
-                <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#descargarModal" data-book-id="{{$carpeta->idCarpeta}}" data-book-nombre="{{$carpeta->nom}}" data-book-path="{{$carpeta->path}}"><span class="glyphicon glyphicon-cloud-download"></button></td>
-                <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gestionarPermisosModal" data-book-id="{{$carpeta->idCarpeta}}" data-book-nombre="{{$carpeta->nom}}"><span class="glyphicon glyphicon-lock"></button></td>
-                <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modificarModal" data-book-id="{{$carpeta->idCarpeta." carpeta"}}" data-book-ultimamod="{{$carpeta->dataModificacio}}" data-book-nombre="{{$carpeta->nom}}" data-book-descripcion="{{$carpeta->descripcio}}" data-book-idUsuari="{{$carpeta->idUsuari}}"><span class="glyphicon glyphicon-wrench"></button></td>
-                <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#moureCarpetaModal" data-book-id="{{$carpeta->idCarpeta}}" data-book-name="{{$totesCarpetes}}"><span class="glyphicon glyphicon-new-window"></button></td>
-                <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#borrarModal" data-book-id="{{$carpeta->idCarpeta." carpeta"}}" data-book-name="{{$carpeta->nom}}"><span class="glyphicon glyphicon-trash"></button></td>
+              <th>Item</th>
+              <th class="centered">Data modificació</th>
+              <th class="centered">Opcions</th>
+            </tr>
+            <tr>
+                <!-- <td class="col-md-1"><input type="checkbox" class="form-check-input"></td> -->
+                <td class="col-md-6"><a href="{{url('/abrirCarpeta/'.$carpeta->idCarpeta)}}"><i class="far fa-folder" style="margin-right: 2rem"></i><b>{{$carpeta->nom}}</b></a></td>
+                <td class="col-md-3 centered" style="vertical-align: middle"><a href="{{url('/abrirCarpeta/'.$carpeta->idCarpeta)}}"><br>{{$carpeta->dataModificacio}}</a></td>
+                <!-- <td class="col-md-1"><span class="glyphicon glyphicon-info-sign"></span></td> -->
+                <!-- <td class="col-md-1"></td> -->
+                <td class="col-md-3 centered">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#descargarModal" data-book-id="{{$carpeta->idCarpeta}}" data-book-nombre="{{$carpeta->nom}}" data-book-path="{{$carpeta->path}}"><span class="glyphicon glyphicon-cloud-download"></button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gestionarPermisosModal" data-book-id="{{$carpeta->idCarpeta}}" data-book-nombre="{{$carpeta->nom}}"><span class="glyphicon glyphicon-lock"></button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modificarModal" data-book-id="{{$carpeta->idCarpeta." carpeta"}}" data-book-ultimamod="{{$carpeta->dataModificacio}}" data-book-nombre="{{$carpeta->nom}}" data-book-descripcion="{{$carpeta->descripcio}}" data-book-idUsuari="{{$carpeta->idUsuari}}"><span class="glyphicon glyphicon-wrench"></button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#moureCarpetaModal" data-book-id="{{$carpeta->idCarpeta}}" data-book-name="{{$totesCarpetes}}"><span class="glyphicon glyphicon-new-window"></button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#borrarModal" data-book-id="{{$carpeta->idCarpeta." carpeta"}}" data-book-name="{{$carpeta->nom}}"><span class="glyphicon glyphicon-trash"></button>
+                </td>
             </tr>
             @endforeach
             @foreach( $arxius as $key => $document)
@@ -50,7 +57,7 @@
                 <td class="col-md-1"><input type="checkbox" class="form-check-input"></td>
                 <td class="col-md-1"><span class="glyphicon glyphicon-file"></span></td>
                 <td class="col-md-3"><b>{{$document->nom}}</b><br>{{$document->dataModificacio}}</td>
-                <td class="col-md-1"><span class="glyphicon glyphicon-info-sign"></span></td>
+                <!-- <td class="col-md-1"><span class="glyphicon glyphicon-info-sign"></span></td> -->
                 <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#generaURLModal" data-book-id="{{$document->idDocument}}" data-book-idversio="{{$document->versioInterna}}" data-book-path="{{$document->path}}"><span class="glyphicon glyphicon-link"></button></td>
                 <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#generaPDF" data-book-id="{{$document->idDocument}}" data-book-nombre="{{$document->nom}}" data-book-path="{{$document->path}}" data-book-formato="{{$document->formatDocument}}"><span class="glyphicon glyphicon-cloud-download"></button></td>
                 <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pujarVersioModal" data-book-id="{{$document->idDocument}}"><span class="glyphicon glyphicon-paperclip"></span></button></button></td>
@@ -62,11 +69,9 @@
         </table>
         <div>
         <button type="button" id="enrere" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-level-up"></span>
-                        <p style="display:inline; margin-left: 5px">
-                            Enrere
-                        </p>
-                    </button>               
+            <span class="glyphicon glyphicon-level-up"></span>
+            <p style="display:inline; margin-left: 5px">Enrere</p>
+        </button>
         </div>
 
         <!-- Modal Descargar ZIP-->
@@ -84,12 +89,12 @@
                 <form id="modalFormDescargarzip" action="" method="POST" style="display:inline">
                 {{ csrf_field() }}
                 <button type="submit" id="downloadzip" class="btn btn-primary btn-success">Descargar ZIP</button>
-                </form>                
+                </form>
               </div>
             </div>
           </div>
         </div>
-        
+
         <!-- Modal Descargar PDF-->
         <div class="modal fade" id="generaPDF" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
@@ -105,7 +110,7 @@
                 <form id="modalFormDescargarpdf" action="" method="POST" style="display:inline">
                 {{ csrf_field() }}
                 <button type="submit" id="downloadpdf" class="btn btn-primary btn-success">Descargar PDF</button>
-                </form>                
+                </form>
               </div>
             </div>
           </div>
@@ -126,12 +131,12 @@
                 <form id="modalFormElim" action="" method="POST" style="display:inline">
                 {{ csrf_field() }}
                 <button type="submit" class="btn btn-primary btn-danger">Eliminar</button>
-                </form>                
+                </form>
               </div>
             </div>
           </div>
         </div>
-        
+
         <!-- Modal Crear-->
         <form id="modalFormCrear" action="" method="POST" style="display:inline">
             <div class="modal fade" id="crearCarpetaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -155,7 +160,7 @@
               </div>
             </div>
         </form>
-        
+
         <!-- Modal Modificar-->
         <form id="modalFormModificar" action="" method="POST" style="display:inline">
             <div class="modal fade" id="modificarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -181,10 +186,10 @@
                     <button type="submit" class="btn btn-primary btn-success">Guardar</button>
                   </div>
                 </div>
-              </div>    
+              </div>
             </div>
         </form>
-        
+
         <!-- Modal Moure-->
         <form id="modalFormMoure" action="" method="POST" style="display:inline">
             <div class="modal fade" id="moureCarpetaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -208,7 +213,7 @@
               </div>
             </div>
         </form>
-        
+
         <form id="modalFormMoureDocument" action="" method="POST" style="display:inline">
             <div class="modal fade" id="moureDocumentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
@@ -231,7 +236,7 @@
               </div>
             </div>
         </form>
-        
+
         <!-- Modal Gestionar Permisos-->
         <div class="modal fade" id="gestionarPermisosModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document" style="width:730px;">
@@ -259,16 +264,16 @@
                         </div>
                         <div id="cambiarPermisCheckboxs" class="form-group">
                           <label>Selecciona un permís: </label>
-                          <input id="cambiarPermisUsuaris" class="form-check-input" type="radio" name="permisosUsuarios" value="s"> Super 
-                          <input id="cambiarPermisUsuariw" class="form-check-input" type="radio" name="permisosUsuarios" value="w"> Escritura 
-                          <input id="cambiarPermisUsuarir" class="form-check-input" type="radio" name="permisosUsuarios" value="r"> Lectura 
-                          <input id="cambiarPermisUsuari-" class="form-check-input" type="radio" name="permisosUsuarios" value="-"> Cap permís 
+                          <input id="cambiarPermisUsuaris" class="form-check-input" type="radio" name="permisosUsuarios" value="s"> Super
+                          <input id="cambiarPermisUsuariw" class="form-check-input" type="radio" name="permisosUsuarios" value="w"> Escritura
+                          <input id="cambiarPermisUsuarir" class="form-check-input" type="radio" name="permisosUsuarios" value="r"> Lectura
+                          <input id="cambiarPermisUsuari-" class="form-check-input" type="radio" name="permisosUsuarios" value="-"> Cap permís
                         </div>
                         <div style="text-align: right">
-                            
+
                             {{ csrf_field() }}
                                 <button type="submit" class="btn btn-primary btn-success">Cambiar</button>
-                            </form> 
+                            </form>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         </div>
                       </div>
@@ -287,10 +292,10 @@
                                 <input class="form-check-input" type="radio" name="permisosUsuarios" value="-"> Cap permís
                             </div>
                             <div style="text-align: right">
-                            
+
                             {{ csrf_field() }}
                                 <button type="submit" class="btn btn-primary btn-success">Afegir usuari</button>
-                            </form> 
+                            </form>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         </div>
                       </div>
@@ -302,10 +307,10 @@
                             <select class="form-control" id="listaUsuariosBorrar" name="listaUsuariosBorrar" style="min-width:120px;"></select>
                         </div>
                         <div style="text-align: right">
-                            
+
                             {{ csrf_field() }}
                                 <button type="submit" class="btn btn-primary btn-success">Borrar permís</button>
-                            </form> 
+                            </form>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         </div>
                       </div>
@@ -318,16 +323,16 @@
                         </div>
                         <div class="form-group">
                           <label>Selecciona un permís: </label>
-                          <input id="cambiarPermisoGrupos" class="form-check-input" type="radio" name="permisosUsuarios" value="s"> Super 
-                          <input id="cambiarPermisoGrupow" class="form-check-input" type="radio" name="permisosUsuarios" value="w"> Escritura 
-                          <input id="cambiarPermisoGrupor" class="form-check-input" type="radio" name="permisosUsuarios" value="r"> Lectura 
-                          <input id="cambiarPermisoGrupo-" class="form-check-input" type="radio" name="permisosUsuarios" value="-"> Cap permís 
+                          <input id="cambiarPermisoGrupos" class="form-check-input" type="radio" name="permisosUsuarios" value="s"> Super
+                          <input id="cambiarPermisoGrupow" class="form-check-input" type="radio" name="permisosUsuarios" value="w"> Escritura
+                          <input id="cambiarPermisoGrupor" class="form-check-input" type="radio" name="permisosUsuarios" value="r"> Lectura
+                          <input id="cambiarPermisoGrupo-" class="form-check-input" type="radio" name="permisosUsuarios" value="-"> Cap permís
                         </div>
                         <div style="text-align: right">
-                            
+
                             {{ csrf_field() }}
                                 <button type="submit" class="btn btn-primary btn-success">Cambiar</button>
-                            </form> 
+                            </form>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         </div>
                       </div>
@@ -346,10 +351,10 @@
                                 <input class="form-check-input" type="radio" name="permisosUsuarios" value="-"> Cap permís
                             </div>
                             <div style="text-align: right">
-                                
+
                                 {{ csrf_field() }}
                                     <button type="submit" class="btn btn-primary btn-success">Afegir grup</button>
-                                </form> 
+                                </form>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             </div>
                       </div>
@@ -361,18 +366,19 @@
                             <select class="form-control" id="listaGruposBorrar" name="listaGruposBorrar" style="min-width:120px;"></select>
                         </div>
                         <div style="text-align: right">
-                            
+
                             {{ csrf_field() }}
                                 <button type="submit" class="btn btn-primary btn-success">Borrar permís</button>
-                            </form> 
+                            </form>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         </div>
                       </div>
-                    </div>      
+                    </div>
               </div>
             </div>
           </div>
         </div>
+
         <!-- Pujar document -->
         <div id="modalPujarArxiu" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
@@ -407,7 +413,7 @@
 
                                 <div class="form-group text-center">
                                     <button type="submit" class="btn btn-primary" > <!-- style="padding:8px 100px;margin-top:25px;" form-group  -->
-                                            Pujar arxiu 
+                                            Pujar arxiu
                                     </button>
                                 </div>
                             </div>
@@ -418,6 +424,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Pujar Versió -->
         <div class="modal fade" id="pujarVersioModal" role="dialog">
             <div class="modal-dialog">
@@ -459,9 +466,9 @@
 
                             <div class="form-group text-center">
                                     <button type="submit" class="btn btn-primary">
-                                            Pujar arxiu 
+                                            Pujar arxiu
                                     </button>
-                            </div> 
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -470,9 +477,8 @@
                 </div>
              </div>
         </div>
-        
-        
-        <!-- Modal GeneraURL-->      
+
+        <!-- Modal GeneraURL-->
             <form id="modalFormURL" action="" method="POST" style="display:inline">
                 <div class="modal fade" id="generaURLModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -488,23 +494,23 @@
                         <button id="buttonCopiarURL" type="submit" class="btn btn-primary btn-success">Copiar</button>
                       </div>
                     </div>
-                  </div>    
+                  </div>
                 </div>
             </form>
-        
+
         <script>
-            
+
             $("#enrere").click(function(e){window.history.back();});
-            
+
             $('#descargarModal').on('show.bs.modal', function (e) {
                 var id = $(e.relatedTarget).data('book-id');
                 var nombre = $(e.relatedTarget).data('book-nombre');
                 var path = $(e.relatedTarget).data('book-path');
-                
+
                 $('#modalFormDescargarzip').attr('action', '../CU_19/'+id+'/'+path+'/'+nombre);
-               
+
             });
-            
+
             $('#generaPDF').on('show.bs.modal', function (e) {
                 //Recollim la id, el nom, el path i el format del archiu on hem fet click
                 var id = $(e.relatedTarget).data('book-id');
@@ -514,9 +520,9 @@
                 var encode = encodeURIComponent(path);
                 //Al fer click sobre "Descargar PDF" activem el controlador del CU13
                 $('#modalFormDescargarpdf').attr('action', '../CU_13/'+id+'/'+nombre+'/'+path+'/'+formato);
-                
+
             });
-            
+
             $('#gestionarPermisosModal').on('show.bs.modal', function(e) {
                 var id = $(e.relatedTarget).data('book-id');
                 var nombre = $(e.relatedTarget).data('book-nombre');
@@ -537,7 +543,7 @@
                     $("#listaGruposAgregar").empty().append(response["afegirGrup"]);
                     $("#listaGruposBorrar").empty().append(response["borrarGrup"]);
                 })
-                
+
                 $("#listaUsuariosCambiar").change(function() {
                     var idusuari=$('option:selected', this).attr('id');
                     $.ajax({
@@ -550,12 +556,12 @@
                             idUsuari:idusuari,
                             idCarpeta:id
                         },
-                        url: '../permisUsuari', 
+                        url: '../permisUsuari',
                         success: function(result){
                             $("#cambiarPermisUsuari"+result).prop("checked",true);
                         }});
                 });
-                
+
                 $("#listaGruposCambiar").change(function() {
                     var idgrup=$('option:selected', this).attr('id');
                     $.ajax({
@@ -568,13 +574,13 @@
                             idGrup:idgrup,
                             idCarpeta:id
                         },
-                        url: '../permisGrup', 
+                        url: '../permisGrup',
                         success: function(result){
                             $("#cambiarPermisoGrupo"+result).prop("checked",true);
                         }});
                 });
             });
-            
+
             $('#borrarModal').on('show.bs.modal', function(e) {
                 var bookId = $(e.relatedTarget).data('book-id');
                 var id = bookId.split(" ");
@@ -585,14 +591,14 @@
                 }else{
                     $('#modalFormElim').attr('action', '../borrarDocumento/'+id[0]);
                 }
-                
+
             });
-            
+
             $('#crearCarpetaModal').on('show.bs.modal', function(e) {
                 var id = $(e.relatedTarget).data('book-id');
                 $('#modalFormCrear').attr('action', '../crearCarpeta/'+id);
             });
-            
+
             $('#modificarModal').on('show.bs.modal', function(e) {
                 var id = $(e.relatedTarget).data('book-id');
                 var nombre = $(e.relatedTarget).data('book-nombre');
@@ -605,52 +611,52 @@
                 $('#descripcionInput').val(descripcion);
                 $('#ultimaModificacio').text(ultimaModificacio);
                 $('#modificatIput').text(modificatPer);
-                
+
                 $('#modalFormModificar').attr('action', '../modificarCarpeta/'+id);
             });
-            
+
             $('#moureCarpetaModal').on('show.bs.modal', function(e) {
                 var id = $(e.relatedTarget).data('book-id');
                 var html = $(e.relatedTarget).data('book-name');
                 $('#listaCarpeta').text("");
                 $('#listaCarpeta').append(html);
                 $(".arbol").click(function(e){$("#nombreMovCarpeta").val($(this).prop("id"));});
-                
+
                 $('#modalFormMoure').attr('action', '../moureCarpeta/'+id);
             });
-            
+
             $('#moureDocumentModal').on('show.bs.modal', function(e) {
-                
+
                 var id = $(e.relatedTarget).data('book-id');
                 var html = $(e.relatedTarget).data('book-name');
                 $('#listaCarpetaD').text("");
                 $('#listaCarpetaD').append(html);
                 $(".arbol").click(function(e){$("#nombreMovDocumento").val($(this).prop("id"));});
-                
+
                 $('#modalFormMoureDocument').attr('action', '../moureDocument/'+id);
             });
-            
+
             //Pujar Versió
             $('#pujarVersioModal').on('show.bs.modal', function(e){
                 var id = $(e.relatedTarget).data('book-id');
                 //postPujarVersio
                 $("#pujarVersioID").val(id);
-                
+
                 $('#modalFormPujarVersio').attr('action', '../pujarVersio');
             });
-            
-            //Genera Url 
+
+            //Genera Url
             $('#generaURLModal').on('show.bs.modal', function(e) {
                 var id = $(e.relatedTarget).data('book-id');
                 var idVer = $(e.relatedTarget).data('book-idversio');
                 var path = $(e.relatedTarget).data('book-path');
                 var url = "http://localhost/DAW2M14/public/CU12_URL_Descarrega/"+id+"/"+idVer+"/"+path;
-               
+
                 $('#nombreURL').val(url);
-                
+
                 $('#modalFormURL').attr('action', '../CU12_URL/'+id+"/"+idVer+"/"+path);
             });
-            
+
             $("#buttonCopiarURL").click(function(){
 
                 var copyText = document.getElementById("nombreURL");
@@ -660,8 +666,7 @@
                 document.execCommand("Copy");
 
             });
-            
-            
+
+
         </script>
 @stop
-
