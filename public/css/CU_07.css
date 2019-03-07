@@ -1,16 +1,20 @@
-span{
-    color:#006666;
+.tabla-carpetas span {
     margin: 1%;
     font-size: 20px;
 }
 
-a{
-   color:black;
-   text-decoration: none; 
-   background-color: none;
+.tabla-carpetas a {
+   text-decoration: none;
 }
 
-.table>tbody>tr>td{
-    vertical-align: middle !important; 
+.tabla-carpetas a:hover {
+  text-decoration: none;
 }
 
+.tabla-carpetas>tbody>tr>td {
+    vertical-align: middle !important;
+}
+
+.tabla-carpetas .centered {
+  text-align: center;
+}
