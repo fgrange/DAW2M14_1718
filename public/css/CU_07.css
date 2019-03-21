@@ -13,8 +13,22 @@
 
 .tabla-carpetas>tbody>tr>td {
     vertical-align: middle !important;
+    border-top: none;
 }
 
 .tabla-carpetas .centered {
   text-align: center;
+}
+
+.tabla-carpetas {
+  margin-bottom: 10rem;
+}
+
+.tabla-carpetas .tabla-carpetas-body:hover {
+  background-color: #dadada;
+}
+
+.tabla-carpetas tbody tr th {
+  border-top:none;
+  border-bottom: 1px solid #ddd;
 }

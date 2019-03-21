@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Carpeta;
 use App\Logs;
 use Notification;
@@ -10,22 +11,25 @@ use Notification;
 class CU_23Controller extends Controller {
 
     public function crearCarpeta(Request $request, $id) {
+
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        
-        
-        $permiso=app('App\Http\Controllers\ComprovarPermisos')->comprovarPermis($id);
+
+        $permiso = app('App\Http\Controllers\ComprovarPermisos')->comprovarPermis($id);
+
         if (($permiso=='w')||($permiso=='s')){
             $carpeta = new Carpeta;
             $carpeta->nom = $request->nomCarpeta;
             $carpeta->descripcio = $request->descripcioCarpeta;
             $carpeta->dataCreacio = date('Y-m-d');
-            $carpeta->dataModificacio = date('Y-m-d');
-            $carpeta->path = "pirula";
+            $carpeta->idUsuariCreacio = $_SESSION['idUsuari'];
+
+            $ruta = DB::table('carpetes')->where('idCarpeta', $id)->value('path');
+            $carpeta->path = $ruta.$request->nomCarpeta;
             $carpeta->idCarpetaPare = $id;
             $carpeta->save();
-            
+
             $log = new Logs;
             $log->idUsuari = $_SESSION['idUsuari'];
             $log->descripcio = "Carpeta ".$request->nomCarpeta." creada.";
@@ -33,7 +37,7 @@ class CU_23Controller extends Controller {
             $log->hora = date('H:i:s');
             $log->path = "En BBDD";
             $log->save();
-            
+
             return redirect('abrirCarpeta/'.$id);
         }else{
             Notification::error("No tens permisos per realitzar aquesta acció.");

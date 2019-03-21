@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Krucas\Notification\Facades\Notification;
 use App\Usuari;
 use App\Logs;
 use App\Carpeta;
-use Krucas\Notification\Facades\Notification;
 
 class CU_52Controller extends Controller {
 
@@ -35,12 +36,16 @@ class CU_52Controller extends Controller {
             $usuari->estat = $request->cu_52estat;
             $usuari->tipus = $request->cu_52tipus;
             $usuari->save();
-            
-            
+
+
             //crear carpeta `privada usuari nou
             $carpeta->nom = $request->cu_52nomUsuari;
+            $carpeta->descripcio = $request->cu_52nomUsuari;
+            $carpeta->idCarpetaPare = '2'; // /Privades
             $carpeta->dataCreacio = date('Y-m-d');
             $carpeta->path = "privades/".$request->cu_52nomUsuari;
+            $carpeta->idUsuariCreacio = DB::table('usuaris')->where('nomUsuari', $request->cu_52nomUsuari)->value('idUsuari');
+
             $carpeta->save();
 
             //Registrar Log
