@@ -2,10 +2,11 @@
 
 @section('content')
 @notification()
-        <table class="table">
+        <table class="table" style="margin-bottom: 5rem;">
             <tr>
-                <td class="col-md-6"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearCarpetaModal" data-book-id="{{$title}}"><span class="glyphicon glyphicon-plus"></span><p style="display:inline; margin-left: 5px">Crear Carpeta</p></button></td>
-                <td class="col-md-6">
+                <td class="col-md-6" style="border-top:none;">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearCarpetaModal" data-book-id="{{$title}}"><span class="glyphicon glyphicon-plus"></span><p style="display:inline; margin-left: 5px;">Crear Carpeta</p></button></td>
+                <td class="col-md-6" style="border-top:none;">
                     <button type="button" class="btn btn-primary"
                             data-toggle="modal" data-target="#modalPujarArxiu">
                         <span class="glyphicon glyphicon-circle-arrow-up"></span>
@@ -16,12 +17,12 @@
                 </td>
             </tr>
             <tr>
-                <td class="col-md-6">
+                <td class="col-md-6" style="border-top:none;">
                     <select class="form-control">
                         <option>Acció en masa</option>
                     </select>
                 </td>
-                <td class="col-md-6">
+                <td class="col-md-6" style="border-top:none;">
                     <select class="form-control">
                         <option>Ordena per</option>
                     </select>
@@ -31,18 +32,17 @@
 
 
         <table class="table tabla-carpetas">
+          <tr>
+            <th class="col-md-6">Item</th>
+            <th class="col-md-3 centered">Data modificació</th>
+            <th class="col-md-3 centered">Opcions</th>
+          </tr>
             @foreach( $carpetes as $key => $carpeta)
-            <tr>
-              <th>Item</th>
-              <th class="centered">Data modificació</th>
-              <th class="centered">Opcions</th>
-            </tr>
-            <tr>
-                <!-- <td class="col-md-1"><input type="checkbox" class="form-check-input"></td> -->
+            <tr class="tabla-carpetas-body">
+
                 <td class="col-md-6"><a href="{{url('/abrirCarpeta/'.$carpeta->idCarpeta)}}"><i class="far fa-folder" style="margin-right: 2rem"></i><b>{{$carpeta->nom}}</b></a></td>
-                <td class="col-md-3 centered" style="vertical-align: middle"><a href="{{url('/abrirCarpeta/'.$carpeta->idCarpeta)}}"><br>{{$carpeta->dataModificacio}}</a></td>
-                <!-- <td class="col-md-1"><span class="glyphicon glyphicon-info-sign"></span></td> -->
-                <!-- <td class="col-md-1"></td> -->
+                <td class="col-md-3 centered" style="vertical-align: middle"><br>{{{ isset($carpeta->dataModificacio) ? $carpeta->dataModificacio : $carpeta->dataCreacio}}}</td>
+
                 <td class="col-md-3 centered">
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#descargarModal" data-book-id="{{$carpeta->idCarpeta}}" data-book-nombre="{{$carpeta->nom}}" data-book-path="{{$carpeta->path}}"><span class="glyphicon glyphicon-cloud-download"></button>
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gestionarPermisosModal" data-book-id="{{$carpeta->idCarpeta}}" data-book-nombre="{{$carpeta->nom}}"><span class="glyphicon glyphicon-lock"></button>
@@ -54,16 +54,19 @@
             @endforeach
             @foreach( $arxius as $key => $document)
             <tr>
-                <td class="col-md-1"><input type="checkbox" class="form-check-input"></td>
-                <td class="col-md-1"><span class="glyphicon glyphicon-file"></span></td>
-                <td class="col-md-3"><b>{{$document->nom}}</b><br>{{$document->dataModificacio}}</td>
-                <!-- <td class="col-md-1"><span class="glyphicon glyphicon-info-sign"></span></td> -->
-                <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#generaURLModal" data-book-id="{{$document->idDocument}}" data-book-idversio="{{$document->versioInterna}}" data-book-path="{{$document->path}}"><span class="glyphicon glyphicon-link"></button></td>
-                <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#generaPDF" data-book-id="{{$document->idDocument}}" data-book-nombre="{{$document->nom}}" data-book-path="{{$document->path}}" data-book-formato="{{$document->formatDocument}}"><span class="glyphicon glyphicon-cloud-download"></button></td>
-                <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pujarVersioModal" data-book-id="{{$document->idDocument}}"><span class="glyphicon glyphicon-paperclip"></span></button></button></td>
-                <td class="col-md-1"><a href="{{url('veureVersions/'.$document->idDocument)}}"><button type="button" class="btn btn-primary" data-toggle="modal"><span class="glyphicon glyphicon-list-alt"></span></button></a></td>
-                <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#moureDocumentModal" data-book-id="{{$document->idDocument}}" data-book-name="{{$totesCarpetes}}"><span class="glyphicon glyphicon-new-window"></button></td>
-                <td class="col-md-1"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#borrarModal" data-book-id="{{$document->idDocument." documento"}}" data-book-name="{{$document->nom}}"><span class="glyphicon glyphicon-trash"></button></td>
+
+                <td class="col-md-6"><i class="far fa-file" style="margin-right: 2rem"></i><b>{{$document->nom}}</b></a></td>
+                <td class="col-md-3 centered" style="vertical-align: middle"><br>{{{ isset($document->dataModificacio) ? $document->dataModificacio : $document->dataCreacio}}}</a></td>
+
+                <td class="col-md-3 centered">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#generaURLModal" data-book-id="{{$document->idDocument}}" data-book-idversio="{{$document->versioInterna}}" data-book-path="{{$document->path}}"><span class="glyphicon glyphicon-link"></button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#generaPDF" data-book-id="{{$document->idDocument}}" data-book-nombre="{{$document->nom}}" data-book-path="{{$document->path}}" data-book-formato="{{$document->formatDocument}}"><span class="glyphicon glyphicon-cloud-download"></button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pujarVersioModal" data-book-id="{{$document->idDocument}}"><span class="glyphicon glyphicon-paperclip"></span></button>
+                  <a href="{{url('veureVersions/'.$document->idDocument)}}"><button type="button" class="btn btn-primary" data-toggle="modal"><span class="glyphicon glyphicon-list-alt"></span></button></a>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#moureDocumentModal" data-book-id="{{$document->idDocument}}" data-book-name="{{$totesCarpetes}}"><span class="glyphicon glyphicon-new-window"></button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#borrarModal" data-book-id="{{$document->idDocument." documento"}}" data-book-name="{{$document->nom}}"><span class="glyphicon glyphicon-trash"></button>
+
+                </td>
             </tr>
             @endforeach
         </table>
@@ -146,7 +149,7 @@
                     <h4 class="modal-title" id="exampleModalLabel">Crear Carpeta</h4>
                   </div>
                   <div class="modal-body">
-                      <h4>Nom:<h4><input type="text" name="nomCarpeta" id="nomCarpeta" maxlength="15" class="form-control">
+                      <h4>Nom:<h4><input type="text" name="nomCarpeta" id="nomCarpeta" maxlength="15" class="form-control" required>
                       <h4>Descripció:<h4><textarea name="descripcioCarpeta" id="descripcioCarpeta" rows="8" maxlength="200" class="form-control"></textarea>
                   </div>
                   <div class="modal-footer">
