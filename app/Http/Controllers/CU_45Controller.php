@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Usuari;
 use App\Logs;
+use App\Carpeta;
 use Krucas\Notification\Facades\Notification;
 use Illuminate\Support\Facades\DB;
 
@@ -25,14 +26,17 @@ class CU_45Controller extends Controller {
     }
 
     public function modificarUsuari(Request $request) {
-
         $id = $request->cu45_idUsuari;
-        $usuari = DB::select("SELECT * FROM usuaris WHERE idUsuari <> " . $id . " AND (nomUsuari = '" . $request->nomUsuari . "' OR email = '" . $request->email . "')");
+        $usuari = DB::select("SELECT * FROM usuaris WHERE idUsuari <> " . $id . " AND (nomUsuari = '" . $request->cu45_nomUsuari . "' OR email = '" . $request->email . "')");
         $user1 = Usuari::findOrFail($id);
         $nlog = Logs::where('idLog', $request->cu45_idLog)->first();
-
+        
+        //$carpeta = Carpeta::where("path", "=", "'privades/".$request->cu45_nomUsuari."'")->firstOrFail();
+        //$carpeta = DB::select("SELECT * FROM carpetes WHERE path='privades/".$request->nomUsuari."'");
+        //return "SELECT * FROM carpetes WHERE path='privades/".$request->cu45_nomUsuari."'";
+        
         if ($usuari == null && $nlog == null) {
-            $user1->nomUsuari = $request->cu45_nomUsuari;
+            //$user1->nomUsuari = $request->cu45_nomUsuari;
             //$user1->contrasenya = bcrypt($request->cu45_contrasenya);
             $user1->contrasenya = $request->cu45_contrasenya;
             $user1->nom = $request->cu45_nom;
@@ -43,6 +47,12 @@ class CU_45Controller extends Controller {
             $user1->estat = $request->cu45_estat;
             $user1->tipus = $request->cu45_tipus;
             $user1->save();
+            
+            // modificar el nom de la carpeta i el seu path
+            //$carpeta->nom = $request->cu45_nomUsuari;
+            //$carpeta->dataModificacio = date('Y-m-d');
+            //$carpeta->path = "privades/".$request->cu45_nomUsuari;
+            //$carpeta->save();
 
             //Registrar Log
             $nlog = new Logs;

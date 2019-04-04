@@ -15,7 +15,7 @@
                     <div class="form-group">
                         <label for="nomUsuari" class="col-sm-3 control-label">Nom Usuari:</label>
                         <div class="col-sm-9">
-                            <input type="text" name="cu45_nomUsuari" id="cu45_nomUsuari" class="form-control" placeholder="Nom Usuari" value="" required />
+                            <input type="text" name="cu45_nomUsuari" id="cu45_nomUsuari" class="form-control" placeholder="Nom Usuari" value="" disabled />
                         </div>
                     </div>
                     <div class="form-group">

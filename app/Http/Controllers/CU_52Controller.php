@@ -41,6 +41,7 @@ class CU_52Controller extends Controller {
             $carpeta->nom = $request->cu_52nomUsuari;
             $carpeta->dataCreacio = date('Y-m-d');
             $carpeta->path = "privades/".$request->cu_52nomUsuari;
+            $carpeta->idCarpetaPare = 2;
             $carpeta->save();
 
             //Registrar Log

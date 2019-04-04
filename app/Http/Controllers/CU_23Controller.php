@@ -15,7 +15,7 @@ class CU_23Controller extends Controller {
         }
         
         
-        $permiso=app('App\Http\Controllers\ComprovarPermisos')->comprovarPermis($id);
+        $permiso=app('App\Http\Controllers\ComprovarPermisos')->comprovarPermisos($id);
         if (($permiso=='w')||($permiso=='s')){
             $carpeta = new Carpeta;
             $carpeta->nom = $request->nomCarpeta;
