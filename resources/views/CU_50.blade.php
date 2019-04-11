@@ -39,14 +39,14 @@
                         
                         @foreach($plantillarevisors as $revi)
                         
-                        @foreach($users as $user)
-                        @if ($plantillas->idPlantilla == $revi->idPlantilla)
-                            @if($revi->idUsuariRevisor==$user->idUsuari)
-                            
-                        <td >{{ $user->nomUsuari }}</td>
-                        @endif
-                        @endif
-                        @endforeach
+                            @foreach($users as $user)
+                                @if ($plantillas->idPlantilla == $revi->idPlantilla)
+                                    @if($revi->idUsuariRevisor==$user->idUsuari)
+
+                                        <td >{{ $user->nomUsuari }}</td>
+                                    @endif
+                                @endif
+                            @endforeach
                         @endforeach
                         
                         <td></td>

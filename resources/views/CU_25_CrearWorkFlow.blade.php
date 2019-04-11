@@ -1,5 +1,7 @@
 @extends('layouts.master')
 @section('content')
+
+@include('CU_26')
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -64,92 +66,90 @@ $(document).ready(function() {
 
 </script>
 
-				<div class="container">
-  
-                                    <h2>Crear Workflow</h2>
-                    <div class="panel-body" style="padding:30px">
-                                    {{-- TODO: Abrir el formulario e indicar el método POST --}}
-                                    <form method="POST" action="{{ url('/newWorkflow') }}">
+<div class="container">
+    <h2>Crear Workflow</h2>
+        <div class="panel-body" style="padding:30px">
+                        {{-- TODO: Abrir el formulario e indicar el método POST --}}
+                        <form method="POST" action="{{ url('/newWorkflow') }}">
 
 
-                                        {{-- TODO: Protección contra CSRF --}}
+                            {{-- TODO: Protección contra CSRF --}}
 
-                                        {{ csrf_field() }}
+                            {{ csrf_field() }}
 
-                                        <div class="form-group">
-                                            <label for="Document">Document</label>
-                                            <select class="form-control col-sm-10" name="document">
-                                                @foreach($documents as $document)
+                            <div class="form-group">
+                                <label for="Document">Document</label>
+                                <select class="form-control col-sm-10" name="document">
+                                    @foreach($documents as $document)
 
-                                                <option value="{{ $document->idDocument }}"> {{ $document->nom }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                            
-                                        <div class="form-group">
-                                            {{-- TODO: Completa el input para el año --}}
-                                            <label for="Aprovador">Aprovador/es</label>
-                                            <select class="form-control col-sm-10" name="aprov">
-                                                @foreach($users as $user)
+                                    <option value="{{ $document->idDocument }}"> {{ $document->nom }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-                                                <option value="{{ $user->idUsuari }}"> {{ $user->nomUsuari }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                            <div class="form-group">
+                                {{-- TODO: Completa el input para el año --}}
+                                <label for="Aprovador">Aprovador/es</label>
+                                <select class="form-control col-sm-10" name="aprov">
+                                    @foreach($users as $user)
 
-                                        <div class="form-group">
-                                            {{-- TODO: Completa el input para el año --}}
-                                            <label for="año">Revisor</label>
+                                    <option value="{{ $user->idUsuari }}"> {{ $user->nomUsuari }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-                                            <select class="form-control col-sm-10" multiple size="3" name="revi[]">
-                                                @foreach($users as $user)
+                            <div class="form-group">
+                                {{-- TODO: Completa el input para el año --}}
+                                <label for="año">Revisor</label>
 
-                                                    <option value="{{ $user->idUsuari }}">{{ $user->nomUsuari }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group text-left">
-                                        <label> Data Limit Revisió:</label>
+                                <select class="form-control col-sm-10" multiple size="3" name="revi[]">
+                                    @foreach($users as $user)
 
-                                        <input type="text" name="dataRevi" id="datepicker" readonly="readonly" size="12" />
+                                        <option value="{{ $user->idUsuari }}">{{ $user->nomUsuari }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group text-left">
+                            <label> Data Limit Revisió:</label>
 
-                                        </div>
-                                        </br>
-                                        </br>
-                                         </br>
-                                        </br>
-                                        <div class="form-group">
-                                        <label> Data Limit Aprovació:</label>
+                            <input type="text" name="dataRevi" id="datepicker" readonly="readonly" size="12" />
 
-                                        <input type="text" name="dataAprov" id="datepicker1" readonly="readonly" size="12" />
+                            </div>
+                            </br>
+                            </br>
+                            <div class="form-group">
+                            <label> Data Limit Aprovació:</label>
 
-                                        </div>
-                                        </br>
-                                        </br>
-                                        
-                                        <div class="form-group">
-                                            {{-- TODO: Completa el input para el año --}}
-                                            <label for="año">Eligir Plantilla</label>
+                            <input type="text" name="dataAprov" id="datepicker1" readonly="readonly" size="12" />
 
-                                            <select class="form-control col-sm-10"  name="plantilla">
-                                                @foreach($plantilla as $plantillas)
+                            </div>
+                            </br>
+                            </br>
 
-                                                    <option value="{{ $plantillas->idPlantilla }}">{{ $plantillas->nomPlantilla }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                            <div class="form-group">
+                                {{-- TODO: Completa el input para el año --}}
+                                <label for="año">Eligir Plantilla</label>
 
-                                        <div class="form-group text-center">
-                                            <button type="submit" class="btn btn-primary " style="padding:8px 100px;margin-top:25px;">
-                                                Guardar WorkFlow
-                                            </button>
-                                        </div>
-                                        {{-- TODO: Cerrar formulario --}}
-                                        
-                                        
-                                    </form>
+                                <select class="form-control col-sm-10"  name="plantilla">
+                                    @foreach($plantilla as $plantillas)
 
-                        </div>
+                                        <option value="{{ $plantillas->idPlantilla }}">{{ $plantillas->nomPlantilla }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-primary " style="padding:8px 100px;margin-top:25px;">
+                                    Guardar WorkFlow
+                                </button>
+                                
+                            </div>
+                            {{-- TODO: Cerrar formulario --}}
+
+
+                        </form>
+
+            </div>
 </div>
 
 

@@ -8,6 +8,8 @@
            <h1 class="h2">Workflows</h1>   
            <a class="btn btn-success" href="{{url('/CU_25_CrearWorkFlow')}}">Crear Workflow</a>
            <a class="btn btn-info" href="{{url('/historialWorkflow')}}">Ver historial</a>
+           <a class="btn btn-warning" href="{{url('/CU_50')}}">Ver plantillas</a>
+           
             <div class="table-responsive">
                 <?php 
             if(  count($workflows) > 0){
