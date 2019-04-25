@@ -11,60 +11,6 @@
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
 
-<script type="text/javascript">
-
-jQuery(function($){
-
-$.datepicker.regional['es'] = {
-
-closeText: 'Cerrar',
-
-prevText: '&#x3c;Ant',
-
-nextText: 'Sig&#x3e;',
-
-currentText: 'Hoy',
-
-monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
-
-'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-
-monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun',
-
-'Jul','Ago','Sep','Oct','Nov','Dic'],
-
-dayNames: ['Domingo','Lunes','Martes','Mi&eacute;rcoles','Jueves','Viernes','S&aacute;bado'],
-
-dayNamesShort: ['Dom','Lun','Mar','Mi&eacute;','Juv','Vie','S&aacute;b'],
-
-dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&aacute;'],
-
-weekHeader: 'Sm',
-
-dateFormat: 'yy-mm-dd',
-
-firstDay: 1,
-
-isRTL: false,
-
-showMonthAfterYear: false,
-
-yearSuffix: ''};
-
-$.datepicker.setDefaults($.datepicker.regional['es']);
-
-});    
-
- 
-
-$(document).ready(function() {
-
-   $("#datepicker").datepicker();
-   $("#datepicker1").datepicker();
-
-});
-
-</script>
 
 <div class="container">
     <h2>Crear Workflow</h2>
@@ -89,7 +35,7 @@ $(document).ready(function() {
 
                             <div class="form-group">
                                 {{-- TODO: Completa el input para el año --}}
-                                <label for="Aprovador">Aprovador/es</label>
+                                <label for="Aprovador">Aprovador</label>
                                 <select class="form-control col-sm-10" name="aprov">
                                     @foreach($users as $user)
 
@@ -97,22 +43,20 @@ $(document).ready(function() {
                                     @endforeach
                                 </select>
                             </div>
-
+                            
+                            <br><br>
+                            
                             <div class="form-group">
-                                {{-- TODO: Completa el input para el año --}}
-                                <label for="año">Revisor</label>
-
-                                <select class="form-control col-sm-10" multiple size="3" name="revi[]">
-                                    @foreach($users as $user)
-
-                                        <option value="{{ $user->idUsuari }}">{{ $user->nomUsuari }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                                <label for="revisor">Revisor</label><br>
+                                @foreach($users as $user)
+                                    <strong style="font-size: 1em;"><input type="checkbox" name="checkbox_revisor[]" value="{{$user->idUsuari}}" >{{ $user->nomUsuari }}&nbsp;&nbsp;</strong>
+                                @endforeach
+                            </div>    
+                            
                             <div class="form-group text-left">
                             <label> Data Limit Revisió:</label>
-
-                            <input type="text" name="dataRevi" id="datepicker" readonly="readonly" size="12" />
+                            
+                            <input type="date" name="dataRevi"/>
 
                             </div>
                             </br>
@@ -120,7 +64,7 @@ $(document).ready(function() {
                             <div class="form-group">
                             <label> Data Limit Aprovació:</label>
 
-                            <input type="text" name="dataAprov" id="datepicker1" readonly="readonly" size="12" />
+                            <input type="date" name="dataAprov"/>
 
                             </div>
                             </br>
@@ -131,6 +75,7 @@ $(document).ready(function() {
                                 <label for="año">Eligir Plantilla</label>
 
                                 <select class="form-control col-sm-10"  name="plantilla">
+                                    <option selected="selected" value="">Tria una plantilla</option>
                                     @foreach($plantilla as $plantillas)
 
                                         <option value="{{ $plantillas->idPlantilla }}">{{ $plantillas->nomPlantilla }}</option>

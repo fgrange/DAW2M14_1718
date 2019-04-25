@@ -31,7 +31,7 @@ class CU_26Controller extends Controller
         endforeach;
     
       
-       return redirect ('/CU_50');
+       return redirect ('/CU_25_CrearWorkFlow');
 
     }
     /*public function postCreate2(Request $request) {

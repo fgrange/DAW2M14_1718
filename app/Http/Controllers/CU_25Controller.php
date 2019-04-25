@@ -21,30 +21,41 @@ class CU_25Controller extends Controller
     
     
     public function postCreate(Request $request) {
-       session_start();
-       $worklows = new crearWorkFlow;
-       $worklows->idDocument= $request->document;
-       $worklows->idUsuariAprovador= $request->aprov;
-       $worklows->idUsuariCreacio= $_SESSION['idUsuari'];
-       $worklows->dataCreacio= date('Y-m-d H:i:s');
-       $worklows->dataLimitRevisio= $request->dataRevi;
-       $worklows->dataLimitAprovacio= $request->dataAprov;
-       $worklows->estat= 'Nou';
-       
-       $worklows->save();
+        session_start();
+        $worklows = new crearWorkFlow;
+        $worklows->idDocument= $request->document;
+        $worklows->idUsuariAprovador= $request->aprov;
+        $worklows->idUsuariCreacio= $_SESSION['idUsuari'];
+        $worklows->dataCreacio= date('Y-m-d H:i:s');
+        $worklows->dataLimitRevisio= $request->dataRevi;
+        $worklows->dataLimitAprovacio= $request->dataAprov;
+        $worklows->estat= 'Nou';
+
+        $worklows->save();
           
 //       $plantirevisors = new plantillaRevisor;
 //       $plantirevisors->idUsuariRevisor= $request->revi;
      
-        foreach ($request->revi as $revi):
+        /*foreach ($request->revi as $revi):
             $revisorworkflows = new workflowRevisor;
             $revisorworkflows->idUsuariRevisor= $revi;
             $revisorworkflows->idWorkflow=$worklows->idWorkflow;
             $revisorworkflows->save();
-        endforeach;
+        endforeach;*/
+       
+        $ultimWorkflow = crearWorkFlow::max("idWorkflow");
+        if (!empty($request->checkbox_revisor)) {//inserta en la base de datos si almenos un checkbox esta seleccionado.
+            
+            foreach ($request->checkbox_revisor as $revi){
+                 $revisorworkflows = new workflowRevisor;
+                 $revisorworkflows->idUsuariRevisor = $revi;
+                 $revisorworkflows->idWorkflow = $ultimWorkflow;
+                 $revisorworkflows->save();
+            }
+       }
     
       
-       return redirect ('/mostar_workflows');
+        return redirect ('/mostar_workflows');
 
     }
     /*public function postCreate2(Request $request) {
