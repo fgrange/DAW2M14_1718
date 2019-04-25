@@ -3,15 +3,15 @@
 @section('content')
 <link href="{{ url('css/CU_04.css')}}" rel="stylesheet" type="text/css"/>
 <div class="row" style="margin-top:20px">
-    
+
 	<div class="col-md-11">
-           <h1 class="h2">Workflows</h1>   
+           <h1 class="h2">Workflows</h1>
            <a class="btn btn-success" href="{{url('/CU_25_CrearWorkFlow')}}">Crear Workflow</a>
            <a class="btn btn-info" href="{{url('/historialWorkflow')}}">Ver historial</a>
            <a class="btn btn-warning" href="{{url('/CU_50')}}">Ver plantillas</a>
-           
+
             <div class="table-responsive">
-                <?php 
+                <?php
             if(  count($workflows) > 0){
               ?>
                 <table class="table table-striped table-sm">
@@ -36,7 +36,7 @@
                         <td>{{ $workf->nom }}</td>
                         <td>{{ $workf->estat }}</td>
                         <td>
-                          @if($workf->idUsuariAprovador==$idUsuari)  
+                          @if($workf->idUsuariAprovador==$idUsuari)
                             <a class="btn btn-success" href="{{url('/aprovarWorkflow')}}">Aprovar</a>
                           @endif
                           @foreach($idRevisor as $revi)
@@ -44,10 +44,10 @@
                                 <a class="btn btn-info" href="{{url('/revisarWorkflow')}}">Revisar</a>
                               @endif
                           @endforeach
-                          @if($workf->idUsuariCreacio==$idUsuari && $workf->estat =='Revisat' )                     
+                          @if($workf->idUsuariCreacio==$idUsuari && $workf->estat =='Revisat' )
                             <a class="btn btn-default" href="{{url('/forcarWorkflow')}}">Completar</a>
                           @endif
-                          @if($workf->estat !='Revisat' || $workf->estat !='Aprovat')    
+                          @if($workf->estat !='Revisat' || $workf->estat !='Aprovat')
                             <a class="btn btn-danger" href="{{url('/eliminarWorkflow')}}">Eliminar</a>
                            @endif
                            <a class="btn btn-warning" href="{{url('/descarregaWorkflow/'.$workf->idDocument)}}">Descarrega</a>
@@ -56,9 +56,9 @@
                     @endforeach
                   </tbody>
                 </table>
-                
+
       <?php }else{
-                  echo "No se han encontrado coincidencias"; 
+                  echo "No se han encontrado coincidencias";
             } ?>
           </div>
 	</div>

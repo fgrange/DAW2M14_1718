@@ -1,15 +1,19 @@
 @extends('layouts.master')
 
+@section('assets')
+  <link href="{{ url('css/CU_07.css')}}" rel="stylesheet" type="text/css"/>
+@endsection
+
 @section('content')
 @notification()
         <table class="table" style="margin-bottom: 5rem;">
             <tr>
                 <td class="col-md-6" style="border-top:none;">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearCarpetaModal" data-book-id="{{$title}}"><span class="glyphicon glyphicon-plus"></span><p style="display:inline; margin-left: 5px;">Crear Carpeta</p></button></td>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearCarpetaModal" data-book-id="{{$title}}"><i class="fas fa-plus"></i><p style="display:inline; margin-left: 5px;">Crear Carpeta</p></button></td>
                 <td class="col-md-6" style="border-top:none;">
                     <button type="button" class="btn btn-primary"
                             data-toggle="modal" data-target="#modalPujarArxiu">
-                        <span class="glyphicon glyphicon-circle-arrow-up"></span>
+                        <i class="fas fa-upload"></i>
                         <p style="display:inline; margin-left: 5px">
                             Pujar Document
                         </p>
@@ -387,10 +391,10 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          {{-- <button type="button" class="close" data-dismiss="modal">&times;</button> --}}
                         <div>
                             <h3 class="panel-title text-center">
-                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                                <i class="fas fa-upload"></i>
                                 Pujar document
                             </h3>
                         </div>
