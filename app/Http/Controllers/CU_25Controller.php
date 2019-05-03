@@ -18,8 +18,8 @@ class CU_25Controller extends Controller
        $plantilla = crearPlantilla::all();
        return view('CU_25_CrearWorkFlow', compact('users', 'documents', 'plantilla'));
     }
-    
-    
+
+
     public function postCreate(Request $request) {
         session_start();
         $worklows = new crearWorkFlow;
@@ -32,20 +32,20 @@ class CU_25Controller extends Controller
         $worklows->estat= 'Nou';
 
         $worklows->save();
-          
+
 //       $plantirevisors = new plantillaRevisor;
 //       $plantirevisors->idUsuariRevisor= $request->revi;
-     
+
         /*foreach ($request->revi as $revi):
             $revisorworkflows = new workflowRevisor;
             $revisorworkflows->idUsuariRevisor= $revi;
             $revisorworkflows->idWorkflow=$worklows->idWorkflow;
             $revisorworkflows->save();
         endforeach;*/
-       
+
         $ultimWorkflow = crearWorkFlow::max("idWorkflow");
         if (!empty($request->checkbox_revisor)) {//inserta en la base de datos si almenos un checkbox esta seleccionado.
-            
+
             foreach ($request->checkbox_revisor as $revi){
                  $revisorworkflows = new workflowRevisor;
                  $revisorworkflows->idUsuariRevisor = $revi;
@@ -53,8 +53,8 @@ class CU_25Controller extends Controller
                  $revisorworkflows->save();
             }
        }
-    
-      
+
+
         return redirect ('/mostar_workflows');
 
     }
@@ -62,18 +62,23 @@ class CU_25Controller extends Controller
        $plantirevisors = new plantillaRevisor;
        $plantirevisors->idUsuariRevisor= $request->revi;
        $plantirevisors->save();
-       
-      
+
+
        return redirect ('/CU_26');
 
     }*/
-    
+
     public function descarregarDocument($idDocument) {
-        //Al pitja el boto de descarrega es fa una consulta per obtenir el path del document i amb la ruta es descarrega el document 
+        //Al pitja el boto de descarrega es fa una consulta per obtenir el path del document i amb la ruta es descarrega el document
       $resultat = Document::where('idDocument', '=', $idDocument)->get();
 
       return response()->download(storage_path("app/{$resultat[0]->path}"));
     }
-    
-    
+
+    public function getPlantilla($id){
+      $plantilla = crearPlantilla::where('idPlantilla', $id)->get();
+      return $plantilla;
+    }
+
+
 }

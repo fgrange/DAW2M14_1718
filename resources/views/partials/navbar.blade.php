@@ -51,10 +51,8 @@
 </div>
 
 <script>
-    <!--
-            Posar funció window.width per a obrir o tancar la navbar
-            Evitar que el main es "caigui"
-            -- >
+            // Posar funció window.width per a obrir o tancar la navbar
+            // Evitar que el main es "caigui"
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
     }

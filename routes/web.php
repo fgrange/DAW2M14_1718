@@ -142,6 +142,8 @@ Route::get('/CU_25_CrearWorkFlow', 'CU_25Controller@getIndex');
 Route::post('/newWorkflow', 'CU_25Controller@postCreate');
 
 Route::get('/descarregaWorkflow/{idDocument}', 'CU_25Controller@descarregarDocument');
+
+Route::get('/selectorPlantilla/{id}', 'CU_25Controller@getPlantilla');
 //
 //
 //
@@ -260,4 +262,3 @@ Route::post('/newUser', 'CU_52Controller@afegirUsuari');
 
 //
 // feina addicional
-

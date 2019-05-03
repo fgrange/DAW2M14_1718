@@ -8,7 +8,9 @@
         <script src="{{ url('js/jquery.min.js')}}"></script>
         <script src="{{ url('js/CU_36.js')}}"></script>
         <script src="{{ url('js/bootstrap.min.js')}}"></script>
-        <script src="{{ url('js/app.js')}}"></script>
+
+        {{-- Aixo fa incloure el vue i el bootstrap --}}
+        {{-- <script src="{{ url('js/app.js')}}"></script> --}}
 
         <!-- CSS -->
 
@@ -25,6 +27,7 @@
 
         <title>Gestor de continguts</title>
         @yield('assets')
+
     </head>
 
     <body>
@@ -36,6 +39,6 @@
             <!-- Crear css per cada un -->
         </div>
 
-
+        @yield('scripts')
     </body>
   </html>

@@ -1,11 +1,15 @@
 @extends('layouts.master')
 @section('content')
 
+@section('scripts')
+  <script src="{{ url('js/CU_25.js')}}"></script>
+@endsection
+
 @include('CU_26')
 
 {{-- TODO passar todos los links y scripts al include --}}
-<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.7.2.custom.css" />
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+{{-- <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.7.2.custom.css" /> --}}
+{{-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script> --}}
 
 <h2>Crear Workflow</h2>
 <div class="panel-body" style="padding:30px">
@@ -23,7 +27,7 @@
 
     <div class="form-group">
       <label for="revisor">Revisor</label><br>
-      @include('CU_39_ModificarMembres')
+      {{-- @include('CU_39_ModificarMembres') --}}
       @foreach($users as $user)
         <strong style="font-size: 1em;"><input type="checkbox" name="checkbox_revisor[]" value="{{$user->idUsuari}}">{{ $user->nomUsuari }}&nbsp;&nbsp;</strong>
       @endforeach
@@ -50,8 +54,8 @@
 
     <div class="form-group">
       <label for="año">Escollir plantilla</label>
-      <select class="form-control col-sm-10" name="plantilla">
-        <option selected="selected" value="">Tria una plantilla</option>
+      <select class="form-control col-sm-10" name="plantilla" id="selectorPlantilla">
+        <option selected="selected" value="0">Tria una plantilla</option>
         @foreach($plantilla as $plantillas)
           <option value="{{ $plantillas->idPlantilla }}">{{ $plantillas->nomPlantilla }}</option>
         @endforeach
