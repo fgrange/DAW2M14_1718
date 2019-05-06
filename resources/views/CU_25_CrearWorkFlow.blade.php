@@ -26,7 +26,7 @@
     </div>
 
     <div class="form-group">
-      <label for="revisor">Revisor</label><br>
+      <label for="revisor">Revisor/s</label><br>
       <select multiple class="form-control col-sm-10" name="rev" id="selectRevisors">
         @foreach($users as $user)
           <option value="{{ $user->idUsuari }}"> {{ $user->nomUsuari }}</option>

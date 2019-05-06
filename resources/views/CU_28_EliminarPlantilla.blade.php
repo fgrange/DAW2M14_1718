@@ -1,5 +1,5 @@
 <button data-id="{{ $id }}" id="deleteBtn" name="deleteBtn" type="button" class="btn btn-danger btn-lg active" role="button" data-toggle="modal" data-target="#deleteModal<?php echo $id; ?>">
-  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+  <i class="fas fa-times"></i>
 </button>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="deleteModal<?php echo $id; ?>" aria-labelledby="myModalLabel" aria-hidden="true">

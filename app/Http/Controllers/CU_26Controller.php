@@ -16,7 +16,7 @@ class CU_26Controller extends Controller
        return view('CU_26', compact('users'));
     }
 
-
+    // TODO comprobar si una plantilla ja existeix amb el mateix nom
     public function postCreate(Request $request) {
        session_start();
        $plantilla = new crearPlantilla;
