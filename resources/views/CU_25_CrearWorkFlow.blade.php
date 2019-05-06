@@ -27,15 +27,16 @@
 
     <div class="form-group">
       <label for="revisor">Revisor</label><br>
-      {{-- @include('CU_39_ModificarMembres') --}}
-      @foreach($users as $user)
-        <strong style="font-size: 1em;"><input type="checkbox" name="checkbox_revisor[]" value="{{$user->idUsuari}}">{{ $user->nomUsuari }}&nbsp;&nbsp;</strong>
-      @endforeach
+      <select multiple class="form-control col-sm-10" name="rev" id="selectRevisors">
+        @foreach($users as $user)
+          <option value="{{ $user->idUsuari }}"> {{ $user->nomUsuari }}</option>
+        @endforeach
+      </select>
     </div>
 
     <div class="form-group">
       <label for="Aprovador">Aprovador</label>
-      <select class="form-control col-sm-10" name="aprov">
+      <select class="form-control col-sm-10" name="aprov" id="selectAprovador">
         @foreach($users as $user)
           <option value="{{ $user->idUsuari }}"> {{ $user->nomUsuari }}</option>
         @endforeach

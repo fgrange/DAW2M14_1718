@@ -7,6 +7,7 @@ use App\Document;
 use App\workflowRevisor;
 use App\crearWorkFlow;
 use App\crearPlantilla;
+use App\plantillaRevisor;
 
 
 class CU_25Controller extends Controller
@@ -77,11 +78,10 @@ class CU_25Controller extends Controller
 
     public function getPlantilla(Request $request, $id){
 
-      $plantilla = crearPlantilla::where('idPlantilla', $id)->get();
-      // echo $plantilla->idPlantilla;
-      json_encode($plantilla);
-      return $plantilla;
-      // dd $plantilla;
+      $plantilla['plantilla'] = crearPlantilla::where('idPlantilla', $id)->get();
+      $plantilla['rev'] = plantillaRevisor::where('idPlantilla', $id)->get();
+
+      echo json_encode($plantilla);
     }
 
 
