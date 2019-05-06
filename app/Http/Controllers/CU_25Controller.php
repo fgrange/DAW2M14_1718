@@ -75,9 +75,13 @@ class CU_25Controller extends Controller
       return response()->download(storage_path("app/{$resultat[0]->path}"));
     }
 
-    public function getPlantilla($id){
+    public function getPlantilla(Request $request, $id){
+
       $plantilla = crearPlantilla::where('idPlantilla', $id)->get();
+      // echo $plantilla->idPlantilla;
+      json_encode($plantilla);
       return $plantilla;
+      // dd $plantilla;
     }
 
 

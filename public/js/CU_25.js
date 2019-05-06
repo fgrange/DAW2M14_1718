@@ -1,8 +1,18 @@
 $('#selectorPlantilla').change(function(){
-    if ($(this).val() != 0){
+    var idPlantilla = $(this).val();
+    if (idPlantilla != 0){
 
-      // cambiar valores
+      $.ajax({
+         type:'GET',
+         url:('/selectorPlantilla/' + idPlantilla),
 
-      console.log('fin');
+         success:function(data){
+           console.log(data);
+            var js = JSON.parse(data);
+            console.log(js);
+         }
+      });
+
+      console.log(idPlantilla);
     }
 });
