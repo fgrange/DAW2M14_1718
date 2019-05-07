@@ -24,7 +24,7 @@
 
 					<div class="form-group">
 						<label for="revisor" class="control-label">Revisor/s</label>
-						<select class="form-control" multiple size="3" id="revisor" name="revi[]">
+						<select class="form-control" multiple size="5" id="revisor" name="revi[]">
 							@foreach($users as $user)
 							<option value="{{ $user->idUsuari }}">{{ $user->nomUsuari }}</option>
 							@endforeach

@@ -1,3 +1,4 @@
+// Selector de platillas con ajax
 $('#selectorPlantilla').change(function(){
     var idPlantilla = $(this).val();
     if (idPlantilla != 0){
@@ -20,3 +21,15 @@ $('#selectorPlantilla').change(function(){
       });
     }
 });
+
+// Datepicker
+$(document).ready(function(){
+  var date_input=$('#datepicker .input-group.date');
+  var options={
+    format: 'dd-mm-yyyy',
+    todayHighlight: true,
+    autoclose: true,
+  };
+  date_input.datepicker(options);
+
+})

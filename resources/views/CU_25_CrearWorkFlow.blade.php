@@ -1,8 +1,13 @@
 @extends('layouts.master')
 @section('content')
 
+@section('assets')
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css"/>
+@endsection
+
 @section('scripts')
   <script src="{{ url('js/CU_25.js')}}"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
 @endsection
 
 @include('CU_26')
@@ -43,14 +48,20 @@
       </select>
     </div>
 
-    <div class="form-group text-left">
-      <label> Data límit de revisió:</label>
-      <input type="date" name="dataRevi" />
+    <div class="form-group" id="datepicker">
+      <label class="control-label" for="date">Data límit de revisió:</label>
+      <div class="input-group date" name="date" >
+        <span class="input-group-addon"><i class="fas fa-calendar-alt"></i></span>
+        <input class="form-control" name="dataRevi" placeholder="DD-MM-YYYY" type="text"/>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label> Data límit d'aprovació:</label>
-      <input type="date" name="dataAprov" />
+    <div class="form-group" id="datepicker">
+      <label class="control-label" for="date">Data límit d'aprovació:</label>
+      <div class="input-group date" name="date" >
+        <span class="input-group-addon"><i class="fas fa-calendar-alt"></i></span>
+        <input class="form-control" name="dataAprov" placeholder="DD-MM-YYYY" type="text"/>
+      </div>
     </div>
 
     <div class="form-group">

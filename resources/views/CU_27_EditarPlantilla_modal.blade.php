@@ -21,16 +21,6 @@
 						<input type="text" class="form-control" name="nomPlantilla" id="nomPlantilla" value="{{ $nomPlantilla }}">
 					</div>
 
-					<div class="form-group">
-						<label for="re" class="control-label">Aprovador</label>
-						<select class="form-control" name="aprov">
-							@foreach($userAprov as $user)
-								{{ $user->idUsuari }}
-								<option value="{{ $user->idUsuari }}" <?php if($UsuariAprovador==$user->nomUsuari ) echo "selected" ?>> {{ $user->nomUsuari }}</option>
-							@endforeach
-						</select>
-					</div>
-
 					<?php $revidoresActuales[] = array()?>
 					@foreach($usersRev as $revi)
 						@foreach($userAprov as $user)
@@ -47,6 +37,16 @@
 						<select class="form-control" multiple size="5" name="revi[]" id="re">
 							@foreach($userAprov as $user)
 								<option value="{{ $user->idUsuari }}" <?php if( in_array($user->nomUsuari, $revidoresActuales ) ) echo "selected" ?>>{{ $user->nomUsuari}}</option>
+							@endforeach
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="re" class="control-label">Aprovador</label>
+						<select class="form-control" name="aprov">
+							@foreach($userAprov as $user)
+								{{ $user->idUsuari }}
+								<option value="{{ $user->idUsuari }}" <?php if($UsuariAprovador==$user->nomUsuari ) echo "selected" ?>> {{ $user->nomUsuari }}</option>
 							@endforeach
 						</select>
 					</div>
