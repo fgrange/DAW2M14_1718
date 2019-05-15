@@ -188,7 +188,7 @@ Route::get('/CU_28_EliminarPlantilla/{id}', 'CU_28Controller@getEliminarPlatilla
 //
 //
 // CU35 Laia
-Route::get('/mostar_workflows', 'CU_35Controller@mostrar');
+Route::get('/CU_35_MostrarWorkflows', 'CU_35Controller@mostrar');
 //
 //
 // CU36 Gestionar Grupos (Oscar y Carlos)

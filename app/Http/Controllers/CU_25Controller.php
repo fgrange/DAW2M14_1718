@@ -22,7 +22,7 @@ class CU_25Controller extends Controller
 
     public function postCreate(Request $request) {
         session_start();
-        
+
         $worklows = new crearWorkFlow;
         $worklows->idDocument= $request->document;
         $worklows->idUsuariAprovador= $request->aprov;
@@ -43,7 +43,7 @@ class CU_25Controller extends Controller
                  $revisorworkflows->save();
             }
        }
-        return redirect ('/mostar_workflows');
+        return redirect ('/CU_35_MostrarWorkflows');
     }
 
 
@@ -51,7 +51,7 @@ class CU_25Controller extends Controller
         $deleteRevisors = workflowRevisor::where('idWorkflow', $idWorkflow)->delete();
         $deleteWorkflow = crearWorkFlow::where('idWorkflow', $idWorkflow)->delete();
         // REVIEW notificacions workflow?
-        return redirect ('/mostar_workflows');
+        return redirect ('/CU_35_MostrarWorkflows');
     }
 
     /*public function postCreate2(Request $request) {

@@ -44,7 +44,7 @@
     <a href="{{url('/abrirCarpeta/personal')}}">Personal</a>
     <a href="{{url('/CU_42_GestionarUsuaris')}}">Gestionar Usuaris</a>
     <a href="{{url('/CU_36_GestionarGrups')}}">Gestionar Grups</a>
-    <a href="{{url('/mostar_workflows')}}">Workflows</a>
+    <a href="{{url('/CU_35_MostrarWorkflows')}}">Workflows</a>
     <a href="{{url('/consultarLogs')}}">Consultar Logs</a>
     <a href="#">Notificacions</a>
     <a href="#">Contact</a>

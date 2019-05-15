@@ -33,7 +33,7 @@ class CU_26Controller extends Controller
         endforeach;
 
         Notification::success('Plantilla creada');
-       return redirect ('/mostar_workflows');
+       return redirect ('/CU_35_MostrarWorkflows');
 
     }
     /*public function postCreate2(Request $request) {
