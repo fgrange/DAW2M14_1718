@@ -22,6 +22,7 @@ class CU_25Controller extends Controller
 
     public function postCreate(Request $request) {
         session_start();
+        
         $worklows = new crearWorkFlow;
         $worklows->idDocument= $request->document;
         $worklows->idUsuariAprovador= $request->aprov;
@@ -30,21 +31,10 @@ class CU_25Controller extends Controller
         $worklows->dataLimitRevisio = date('Y-m-d H:i:s', strtotime($request->dataRevi));
         $worklows->dataLimitAprovacio= date('Y-m-d H:i:s', strtotime($request->dataAprov));
         $worklows->estat= 'Nou';
-
         $worklows->save();
 
-        // $plantirevisors = new plantillaRevisor;
-        // $plantirevisors->idUsuariRevisor= $request->revi;
-
-        /*foreach ($request->revi as $revi):
-            $revisorworkflows = new workflowRevisor;
-            $revisorworkflows->idUsuariRevisor= $revi;
-            $revisorworkflows->idWorkflow=$worklows->idWorkflow;
-            $revisorworkflows->save();
-          endforeach;*/
-
         $ultimWorkflow = crearWorkFlow::max("idWorkflow");
-        if (!empty($request->revisors)) {//inserta en la base de datos si almenos un checkbox esta seleccionado.
+        if (!empty($request->revisors)) {//inserta en la base de datos si almenos un select esta seleccionado.
 
             foreach ($request->revisors as $revi){
                  $revisorworkflows = new workflowRevisor;
@@ -53,10 +43,7 @@ class CU_25Controller extends Controller
                  $revisorworkflows->save();
             }
        }
-
-
         return redirect ('/mostar_workflows');
-
     }
 
 
