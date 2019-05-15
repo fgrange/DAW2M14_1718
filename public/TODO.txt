@@ -1,0 +1,1 @@
+CU_49_FiltrarLogs sobra, es pot fer tot amb una sola vista
