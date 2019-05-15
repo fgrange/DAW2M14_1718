@@ -20,7 +20,6 @@ class CU_25Controller extends Controller
        return view('CU_25_CrearWorkFlow', compact('users', 'documents', 'plantilla'));
     }
 
-
     public function postCreate(Request $request) {
         session_start();
         $worklows = new crearWorkFlow;
@@ -34,20 +33,20 @@ class CU_25Controller extends Controller
 
         $worklows->save();
 
-//       $plantirevisors = new plantillaRevisor;
-//       $plantirevisors->idUsuariRevisor= $request->revi;
+        // $plantirevisors = new plantillaRevisor;
+        // $plantirevisors->idUsuariRevisor= $request->revi;
 
         /*foreach ($request->revi as $revi):
             $revisorworkflows = new workflowRevisor;
             $revisorworkflows->idUsuariRevisor= $revi;
             $revisorworkflows->idWorkflow=$worklows->idWorkflow;
             $revisorworkflows->save();
-        endforeach;*/
+          endforeach;*/
 
         $ultimWorkflow = crearWorkFlow::max("idWorkflow");
-        if (!empty($request->checkbox_revisor)) {//inserta en la base de datos si almenos un checkbox esta seleccionado.
+        if (!empty($request->revisors)) {//inserta en la base de datos si almenos un checkbox esta seleccionado.
 
-            foreach ($request->checkbox_revisor as $revi){
+            foreach ($request->revisors as $revi){
                  $revisorworkflows = new workflowRevisor;
                  $revisorworkflows->idUsuariRevisor = $revi;
                  $revisorworkflows->idWorkflow = $ultimWorkflow;
@@ -59,6 +58,15 @@ class CU_25Controller extends Controller
         return redirect ('/mostar_workflows');
 
     }
+
+
+    public function deleteWorkflow($idWorkflow) {
+        $deleteRevisors = workflowRevisor::where('idWorkflow', $idWorkflow)->delete();
+        $deleteWorkflow = crearWorkFlow::where('idWorkflow', $idWorkflow)->delete();
+        // REVIEW notificacions workflow?
+        return redirect ('/mostar_workflows');
+    }
+
     /*public function postCreate2(Request $request) {
        $plantirevisors = new plantillaRevisor;
        $plantirevisors->idUsuariRevisor= $request->revi;

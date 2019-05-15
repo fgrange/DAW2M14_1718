@@ -141,6 +141,8 @@ Route::Post('/crearCarpeta/{id}', 'CU_23Controller@crearCarpeta');
 Route::get('/CU_25_CrearWorkFlow', 'CU_25Controller@getIndex');
 Route::post('/newWorkflow', 'CU_25Controller@postCreate');
 
+Route::get('/deleteWorkflow/{id}', 'CU_25Controller@deleteWorkflow');
+
 Route::get('/descarregaWorkflow/{idDocument}', 'CU_25Controller@descarregarDocument');
 
 Route::get('/selectorPlantilla/{id}', 'CU_25Controller@getPlantilla');
@@ -187,7 +189,6 @@ Route::get('/CU_28_EliminarPlantilla/{id}', 'CU_28Controller@getEliminarPlatilla
 //
 // CU35 Laia
 Route::get('/mostar_workflows', 'CU_35Controller@mostrar');
-//
 //
 //
 // CU36 Gestionar Grupos (Oscar y Carlos)

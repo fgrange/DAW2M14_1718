@@ -48,7 +48,7 @@
                             <a class="btn btn-default" href="{{url('/forcarWorkflow')}}">Completar</a>
                           @endif
                           @if($workf->estat !='Revisat' || $workf->estat !='Aprovat')
-                            <a class="btn btn-danger" href="{{url('/eliminarWorkflow')}}">Eliminar</a>
+                            <a class="btn btn-danger" href="{{url('/deleteWorkflow/'.$workf->idWorkflow)}}">Eliminar</a>
                            @endif
                            <a class="btn btn-warning" href="{{url('/descarregaWorkflow/'.$workf->idDocument)}}">Descarrega</a>
                         </td>
