@@ -44,12 +44,17 @@ class CU_35Controller extends Controller
 
     public function revisarWorkflow(Request $request, $id)
     {
-      $revisio = revisorworkflows::where('idWorkflow', $id)
-                                 ->where('idUsuariRevisor', $idUsuariRevisor)
-                                 ->get();
+      $revisio = workflowRevisor::where('idWorkflow', $request->idWorkflow)
+                                ->where('idUsuariRevisor', $id)
+                                ->first();
+      // dd($revisio);
       $revisio->dataRevisio = date('Y-m-d H:i:s');
       $revisio->estat = 'Revisat';
+      $revisio->save();
 
+      // TODO comprovar si tots revisors done
+
+      return redirect('CU_35_MostrarWorkflows');
     }
 
     public function rebutjarRevisarWorkflow(Request $request, $id)
