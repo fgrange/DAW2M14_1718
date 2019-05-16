@@ -1,5 +1,8 @@
 TODO CU_49_FiltrarLogs sobra, es pot fer tot amb una sola vista
 TODO Filtratge des de la mateixa taula de logs, el controlador nomes cal passar les dades
 TODO Usuaris estandars no inicien sessio
+
+WORKFLOW
 TODO mails aprovadors, revisors i creador workflow
 REVIEW revisar workflow amb mes dun revisor
+TODO permisos workflow -> distinct del controlador

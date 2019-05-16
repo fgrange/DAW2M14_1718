@@ -19,23 +19,25 @@ class CU_35Controller extends Controller
 
 
         $workflows = Workflow::select('workflows.*', 'documents.*')
-      ->join(
-          'revisorworkflows',
-          function ($join) {
-              $join->on('revisorworkflows.idWorkflow', '=', 'workflows.idWorkflow');
-          }
-      )
-      ->join(
-          'documents',
-          function ($join2) {
-              $join2->on('documents.idDocument', '=', 'workflows.idDocument');
-          }
-      )
-      ->where('revisorworkflows.idUsuariRevisor', '=', $id_Usuario)
-      ->where('workflows.idUsuariCreacio', '=', $id_Usuario)
-      ->orWhere('workflows.idUsuariAprovador', '=', $id_Usuario)
-      ->get();
+            ->join(
+                'revisorworkflows',
+                function ($join) {
+                    $join->on('revisorworkflows.idWorkflow', '=', 'workflows.idWorkflow');
+                }
+            )
+            ->join(
+                'documents',
+                function ($join2) {
+                    $join2->on('documents.idDocument', '=', 'workflows.idDocument');
+                }
+            )
+            ->where('workflows.idUsuariCreacio', '=', $id_Usuario)
+            ->orWhere('revisorworkflows.idUsuariRevisor', '=', $id_Usuario)
+            // ->distinct()
+            ->orWhere('workflows.idUsuariAprovador', '=', $id_Usuario)
+            ->get();
         //->toSql();
+        // dd($workflows);
 
         $user = workflowRevisor::where('idUsuariRevisor', '=', $id_Usuario)->get();
 
@@ -44,15 +46,26 @@ class CU_35Controller extends Controller
 
     public function revisarWorkflow(Request $request, $id)
     {
+      // Ha de ser first i no get perque el get ens retorna una coleccio i no podem fer update
       $revisio = workflowRevisor::where('idWorkflow', $request->idWorkflow)
                                 ->where('idUsuariRevisor', $id)
                                 ->first();
-      // dd($revisio);
+                                dd($request
+                              );
       $revisio->dataRevisio = date('Y-m-d H:i:s');
       $revisio->estat = 'Revisat';
       $revisio->save();
 
-      // TODO comprovar si tots revisors done
+      // Comprovem que tothom hagi revisat el doc
+      $revisats = workflowRevisor::where('idWorkflow', $request->idWorkflow)
+                                 ->where('estat', '<>', 'Revisat')
+                                 ->get();
+
+      if (!$revisats) {
+        $canviWorkflow = Workflow::findOrFail($request->idWorkflow);
+        $canviWorkflow->estat = 'Revisat';
+        $canviWorkflow->save();
+      }
 
       return redirect('CU_35_MostrarWorkflows');
     }
