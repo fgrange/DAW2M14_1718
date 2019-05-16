@@ -49,11 +49,9 @@
 
           <td></td>
           <td colspan="4" style="text-align: right">
-            @include('CU_27_EditarPlantilla_modal', ['id' => $plantillas->idPlantilla, 'userAprov' => $users, 'usersRev' => $plantillarevisors,
-            'nomPlantilla' => $plantillas->nomPlantilla, 'UsuCreador' => $usuCreador, 'UsuariAprovador' => $UsuariAprovador ])
+            @include('CU_27_EditarPlantilla_modal', ['id' => $plantillas->idPlantilla, 'userAprov' => $users, 'usersRev' => $plantillarevisors, 'nomPlantilla' => $plantillas->nomPlantilla, 'UsuCreador' => $usuCreador, 'UsuariAprovador' => $UsuariAprovador ])
 
-            @include('CU_28_EliminarPlantilla', ['id' => $plantillas->idPlantilla, 'userAprov' => $users, 'usersRev' => $plantillarevisors,
-            'nomPlantilla' => $plantillas->nomPlantilla, 'UsuCreador' => $usuCreador, 'UsuariAprovador' => $UsuariAprovador ])
+            @include('CU_28_EliminarPlantilla', ['id' => $plantillas->idPlantilla, 'userAprov' => $users, 'usersRev' => $plantillarevisors, 'nomPlantilla' => $plantillas->nomPlantilla, 'UsuCreador' => $usuCreador, 'UsuariAprovador' => $UsuariAprovador ])
           </td>
         </tr>
         @endforeach

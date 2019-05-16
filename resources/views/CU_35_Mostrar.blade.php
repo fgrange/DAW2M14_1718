@@ -11,9 +11,7 @@
            <a class="btn btn-warning" href="{{url('/CU_50')}}">Ver plantillas</a>
 
             <div class="table-responsive">
-                <?php
-            if(  count($workflows) > 0){
-              ?>
+
                 <table class="table table-striped table-sm">
                   <thead>
                     <tr>
@@ -26,6 +24,9 @@
                       <th>Accions</th>
                     </tr>
                   </thead>
+									<?php
+	            if(count($workflows) > 0){
+	              ?>
                   <tbody>
                     @foreach($workflows as $workf)
                       <tr>
@@ -37,30 +38,42 @@
                         <td>{{ $workf->estat }}</td>
                         <td>
                           @if($workf->idUsuariAprovador==$idUsuari)
-                            <a class="btn btn-success" href="{{url('/aprovarWorkflow')}}">Aprovar</a>
+														@if($workf->estat =='Revisat')
+                            	{{-- <a class="btn btn-success" href="{{url('/aprovarWorkflow')}}" >Aprovar</a> --}}
+															@include('CU_35_AprovarWorkflowModal', ['id' => $workfl->idWorkflow, 'idUsuariAprovador' => $workfl->idUsuariAprovador])
+														@else
+															<button type="button" class="btn btn-secondary" disabled>Pendent d'aprovació</button>
+														@endif
                           @endif
                           @foreach($idRevisor as $revi)
                               @if($revi->idWorkflow==$workf->idWorkflow)
-                                <a class="btn btn-info" href="{{url('/revisarWorkflow')}}">Revisar</a>
+																{{-- <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalRevisar">Revisar</button> --}}
+																	@include('CU_35_RevisarWorkflowModal', ['id' => $workfl->idWorkflow, 'idUsuariRevisor' => $revi->idUsuariRevisor])
                               @endif
                           @endforeach
-                          @if($workf->idUsuariCreacio==$idUsuari && $workf->estat =='Revisat' )
+                          @if($workf->idUsuariCreacio==$idUsuari)
                             <a class="btn btn-default" href="{{url('/forcarWorkflow')}}">Completar</a>
                           @endif
-                          @if($workf->estat !='Revisat' || $workf->estat !='Aprovat')
+                          @if(($workf->estat !='Revisat' || $workf->estat !='Aprovat') && ($workf->idUsuariCreacio==$idUsuari))
                             <a class="btn btn-danger" href="{{url('/deleteWorkflow/'.$workf->idWorkflow)}}">Eliminar</a>
                            @endif
-                           <a class="btn btn-warning" href="{{url('/descarregaWorkflow/'.$workf->idDocument)}}">Descarrega</a>
+                           <a class="btn btn-warning" href="{{url('/descarregaWorkflow/'.$workf->idDocument)}}">Descarregar</a>
                         </td>
                       </tr>
                     @endforeach
+
+										<?php }else{ ?>
+											<tr>
+												<td>No s'han trobat coincidències</td>
+											</tr>
+
+							      <?php } ?>
+							          </div>
                   </tbody>
+
                 </table>
 
-      <?php }else{
-                  echo "No se han encontrado coincidencias";
-            } ?>
-          </div>
+
 	</div>
 </div>
 @stop

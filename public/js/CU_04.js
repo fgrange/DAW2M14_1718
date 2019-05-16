@@ -1,6 +1,6 @@
 $(document).ready(function () {
   $('#table-logs').DataTable({
-    paging: false,
+    // paging: false,
     language: {
         "sProcessing":   "Processant...",
         "sLengthMenu":   "Mostra _MENU_ registres",

@@ -189,6 +189,12 @@ Route::get('/CU_28_EliminarPlantilla/{id}', 'CU_28Controller@getEliminarPlatilla
 //
 // CU35 Laia
 Route::get('/CU_35_MostrarWorkflows', 'CU_35Controller@mostrar');
+
+Route::post('/CU_35_RevisarWorkflow/{id}', 'CU_35Controller@revisarWorkflow');
+Route::post('/CU_35_RebutjarRevisarWorkflow/{id}', 'CU_35Controller@rebutjarRevisarWorkflow');
+
+Route::post('/CU_35_AprovarWorkflow/{id}', 'CU_35Controller@aprovarWorkflow');
+Route::post('/CU_35_RebutjarAprovarWorkflow/{id}', 'CU_35Controller@rebutjarAprovarWorkflow');
 //
 //
 // CU36 Gestionar Grupos (Oscar y Carlos)
