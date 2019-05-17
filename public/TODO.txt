@@ -6,3 +6,5 @@ WORKFLOW
 TODO mails aprovadors, revisors i creador workflow
 REVIEW revisar workflow amb mes dun revisor
 TODO permisos workflow -> distinct del controlador
+      controlar permisos des del controlador o des de la vista?
+      admin pot veure tots els processos?
