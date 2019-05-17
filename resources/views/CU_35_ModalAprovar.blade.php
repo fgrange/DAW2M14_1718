@@ -29,6 +29,7 @@
 	              ?>
 				<tbody>
 					@foreach($workflows as $workf)
+						{{-- @if(($revi->idWorkflow==$workf->idWorkflow) && (($revi->idUsuariRevisor==$_SESSION['idUsuari']) || ($workf->idUsuariAprovador==$_SESSION['idUsuari']) || ($workf->idUsuariCreacio==$_SESSION['idUsuari']))) --}}
 							<tr>
 								<td>{{ $workf->idWorkflow }}</td>
 								<td>{{ $workf->dataCreacio }}</td>
@@ -39,8 +40,8 @@
 								<td>
 
 									@if ($idRevisor->idUsuariRevisor==$_SESSION['idUsuari'])
-										@if($idRevisor->estat =='Nou' || $idRevisor->estat =='Examinant')
-											@include('CU_35_ModalRevisar', ['idW' => $workf->idWorkflow, 'idR' => $idRevisor->idUsuariRevisor])
+										@if($revi->estat =='Nou' || $revi->estat =='Examinant' || $revi->estat == null)
+											<button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalRevisar<?php echo $idRevisor->idUsuariRevisor; ?>" data-id="{{ $idRevisor->idUsuariRevisor }}">Revisar</button>
 										@endif
 									@endif
 
@@ -70,6 +71,7 @@
 									@endif
 								</td>
 							</tr>
+						{{-- @endif --}}
 					@endforeach
 					<?php }else{ ?>
 					<tr>
@@ -78,6 +80,48 @@
 					<?php } ?>
 				</tbody>
 			</table>
+		</div>
+	</div>
+</div>
+
+{{-- modal revisar --}}
+<div class="modal fade" id="modalRevisar<?php echo $idRevisor->idUsuariRevisor; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">Revisar workflow</h4>
+			</div>
+
+			<div class="modal-body">
+				<form method="POST" action="{{ url('/CU_35_RevisarWorkflow/'.$workf->idWorkflow) }}">
+					{{ csrf_field() }}
+					<input type="hidden" name="idWorkflow" id="id" value="{{$idRevisor->idUsuariRevisor}}">
+					<div class="form-group">
+						<h4>Estàs segur d'acceptar el document?</h4>
+						<h4>idRev: {{$idRevisor->idUsuariRevisor}}</h4>
+						<h4>idWork: {{$workf->idWorkflow}}</h4>
+					</div>
+			</div>
+
+			<div class="modal-footer">
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary">
+						Acceptar document
+					</button>
+          <form method="POST" action="{{ url('/CU_35_RebutjarRevisarWorkflow/'.$idRevisor->idUsuariRevisor) }}">
+  					{{ csrf_field() }}
+						<input type="hidden" name="idWorkflow" id="id" value="{{$workf->idWorkflow}}">
+            <button type="submit" class="btn btn-danger">
+  						Rebutjar document
+  					</button>
+          </form>
+				</div>
+			</div>
+			</form>
 		</div>
 	</div>
 </div>

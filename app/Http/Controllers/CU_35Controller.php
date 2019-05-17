@@ -19,27 +19,21 @@ class CU_35Controller extends Controller
 
 
         $workflows = Workflow::select('workflows.*', 'documents.*')
-            ->join(
-                'revisorworkflows',
-                function ($join) {
+            ->join('revisorworkflows', function ($join) {
                     $join->on('revisorworkflows.idWorkflow', '=', 'workflows.idWorkflow');
-                }
-            )
-            ->join(
-                'documents',
-                function ($join2) {
+                })
+            ->join('documents', function ($join2) {
                     $join2->on('documents.idDocument', '=', 'workflows.idDocument');
-                }
-            )
+                })
             ->where('workflows.idUsuariCreacio', '=', $id_Usuario)
-            ->orWhere('revisorworkflows.idUsuariRevisor', '=', $id_Usuario)
-            // ->distinct()
+            ->orWhere('revisorworkflows.idUsuariRevisor', '=', $id_Usuario)->distinct()
             ->orWhere('workflows.idUsuariAprovador', '=', $id_Usuario)
             ->get();
         //->toSql();
         // dd($workflows);
 
-        $user = workflowRevisor::where('idUsuariRevisor', '=', $id_Usuario)->get();
+        $user = workflowRevisor::where('idUsuariRevisor', '=', $id_Usuario)->first();
+        dd($user);
 
         return view('CU_35_Mostrar')->with('workflows', $workflows)->with('idUsuari', $id_Usuario)->with('idRevisor', $user);
     }
@@ -50,8 +44,7 @@ class CU_35Controller extends Controller
       $revisio = workflowRevisor::where('idWorkflow', $request->idWorkflow)
                                 ->where('idUsuariRevisor', $id)
                                 ->first();
-                                dd($request
-                              );
+      // dd($revisio);
       $revisio->dataRevisio = date('Y-m-d H:i:s');
       $revisio->estat = 'Revisat';
       $revisio->save();
@@ -59,8 +52,10 @@ class CU_35Controller extends Controller
       // Comprovem que tothom hagi revisat el doc
       $revisats = workflowRevisor::where('idWorkflow', $request->idWorkflow)
                                  ->where('estat', '<>', 'Revisat')
+                                 // si es fica el seguent orWhere afecta als dos wheres anteriors
+                                 // ->orWhere('estat', '<>', 'Rebutjat')
                                  ->get();
-
+      // dd($revisats);
       if (!$revisats) {
         $canviWorkflow = Workflow::findOrFail($request->idWorkflow);
         $canviWorkflow->estat = 'Revisat';
