@@ -3,8 +3,8 @@ TODO Filtratge des de la mateixa taula de logs, el controlador nomes cal passar 
 TODO Usuaris estandars no inicien sessio
 
 WORKFLOW
-TODO mails aprovadors, revisors i creador workflow
-REVIEW revisar workflow amb mes dun revisor
+TODO mails aprovadors, revisors i creador workflow -> no correus, notificacions (de moment res)
+REVIEW revisar workflow amb mes dun revisor ->
 TODO permisos workflow -> distinct del controlador
-      controlar permisos des del controlador o des de la vista?
-      admin pot veure tots els processos?
+      controlar permisos des del controlador o des de la vista? ->controlador
+      admin pot veure tots els processos? -> si
