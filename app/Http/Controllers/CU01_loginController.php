@@ -40,6 +40,7 @@ class CU01_loginController extends Controller
 
            //consultem a la taula carpeta la ruta de la carpeta principa de l'usuari
            $idCarpetaPersonal = Carpeta::where('path', '=','privades/'.$resultat[0]->nomUsuari)->get();
+           // return 'okay'.$idCarpetaPersonal;
            //redirigim a la carpeta principal del usuari;
            return redirect(url('/abrirCarpeta/'.$idCarpetaPersonal[0]->idCarpeta));
         }else {

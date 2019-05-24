@@ -33,13 +33,14 @@ class CU_35Controller extends Controller
         // dd($workflows);
 
         $user = workflowRevisor::where('idUsuariRevisor', '=', $id_Usuario)->first();
-        dd($user);
+        // dd($user);
 
         return view('CU_35_Mostrar')->with('workflows', $workflows)->with('idUsuari', $id_Usuario)->with('idRevisor', $user);
     }
 
     public function revisarWorkflow(Request $request, $id)
     {
+      // dd($request);
       // Ha de ser first i no get perque el get ens retorna una coleccio i no podem fer update
       $revisio = workflowRevisor::where('idWorkflow', $request->idWorkflow)
                                 ->where('idUsuariRevisor', $id)
