@@ -20,6 +20,10 @@
 					<div class="form-group">
 						<h4>Estàs segur d'acceptar el document?</h4>
 					</div>
+					<div class="form-group">
+						<label for="notes" class="control-label">Notes:</label>
+						<textarea class="form-control" name="notesRevisor" id="notesRev" rows="8" ></textarea>
+					</div>
 			</div>
 
 			<div class="modal-footer">
@@ -27,17 +31,28 @@
 					<button type="submit" class="btn btn-primary">
 						Acceptar document
 					</button>
-          <form method="POST" action="{{ url('/CU_35_RebutjarRevisarWorkflow') }}">
-  					{{ csrf_field() }}
-						<input type="hidden" name="idWorkflow" id="id" value="{{$idW}}">
-						<input type="hidden" name="idRevisor" id="id" value="{{$idR}}">
-            <button type="submit" class="btn btn-danger">
-  						Rebutjar document
-  					</button>
-          </form>
 				</div>
 			</div>
+			</form>
+			<form method="POST" action="{{ url('/CU_35_RebutjarRevisarWorkflow') }}"
+				style="position: absolute;
+							 bottom: 14px;
+							 left: 15px">
+				{{ csrf_field() }}
+				<input type="hidden" name="idWorkflow" value="{{$idW}}">
+				<input type="hidden" name="idRevisor" value="{{$idR}}">
+				<input type="hidden" name="notesRevisor" id="nRevi" value="">
+				<button class="btn btn-danger" id="rebutjarButton">
+					Rebutjar document
+				</button>
 			</form>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+			$("#rebutjarButton").click(function(){
+					$('#nRevi').val($.trim($("#notesRev").val()));
+			});
+	});
+</script>

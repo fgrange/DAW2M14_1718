@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Workflow;
 use App\workflowRevisor;
+use App\User;
 
 session_start();
 class CU_35Controller extends Controller
@@ -17,22 +18,37 @@ class CU_35Controller extends Controller
         $workflows = array();
         $id_Usuario = $_SESSION['idUsuari'];
 
+        $userAdmin = User::where('idUsuari', $id_Usuario)->first();
+        // dd($userAdmin->tipus);
 
-        $workflows = Workflow::select('workflows.*', 'documents.*')
-            ->join('revisorworkflows', function ($join) {
-                    $join->on('revisorworkflows.idWorkflow', '=', 'workflows.idWorkflow');
-                })
-            ->join('documents', function ($join2) {
-                    $join2->on('documents.idDocument', '=', 'workflows.idDocument');
-                })
-            ->where('workflows.idUsuariCreacio', '=', $id_Usuario)
-            ->orWhere('revisorworkflows.idUsuariRevisor', '=', $id_Usuario)->distinct()
-            ->orWhere('workflows.idUsuariAprovador', '=', $id_Usuario)
-            ->get();
-        //->toSql();
-        // dd($workflows);
+        if ($userAdmin->tipus == 'Administrador') {
+          $workflows = Workflow::select('workflows.*', 'documents.*')
+              ->join('revisorworkflows', function ($join) {
+                      $join->on('revisorworkflows.idWorkflow', '=', 'workflows.idWorkflow');
+                  })
+              ->join('documents', function ($join2) {
+                      $join2->on('documents.idDocument', '=', 'workflows.idDocument');
+                  })
+              ->get();
+          $user = $userAdmin;
+        } else {
+          $workflows = Workflow::select('workflows.*', 'documents.*')
+              ->join('revisorworkflows', function ($join) {
+                      $join->on('revisorworkflows.idWorkflow', '=', 'workflows.idWorkflow');
+                  })
+              ->join('documents', function ($join2) {
+                      $join2->on('documents.idDocument', '=', 'workflows.idDocument');
+                  })
+              ->where('workflows.idUsuariCreacio', '=', $id_Usuario)
+              ->orWhere('revisorworkflows.idUsuariRevisor', '=', $id_Usuario)->distinct()
+              ->orWhere('workflows.idUsuariAprovador', '=', $id_Usuario)
+              ->get();
 
-        $user = workflowRevisor::where('idUsuariRevisor', '=', $id_Usuario)->get();
+          $user = workflowRevisor::where('idUsuariRevisor', '=', $id_Usuario)->get();
+        }
+
+
+
         // dd($user);
 
         return view('CU_35_Mostrar')->with('workflows', $workflows)->with('idUsuari', $id_Usuario)->with('idRevisor', $user);
@@ -40,20 +56,37 @@ class CU_35Controller extends Controller
 
     public function revisarWorkflow(Request $request)
     {
+
+      // REVIEW hauria de ser aixi, pero nomes fa update del primer valor i no dels tres
+      // $revisio = workflowRevisor::where('idWorkflow', $request->idWorkflow)
+      //                           ->where('idUsuariRevisor', $request->idRevisor)
+      //                           ->update(['estat' => 'Revisat'], ['dataRevisio' => $date], ['notesRevisor' => $request->notesRevisor]);
+
       $revisio = workflowRevisor::where('idWorkflow', $request->idWorkflow)
                                 ->where('idUsuariRevisor', $request->idRevisor)
                                 ->update(['estat' => 'Revisat']);
 
+      $revisio = workflowRevisor::where('idWorkflow', $request->idWorkflow)
+                                ->where('idUsuariRevisor', $request->idRevisor)
+                                ->update(['dataRevisio' => date('Y-m-d H:i:s')]);
+
+      $revisio = workflowRevisor::where('idWorkflow', $request->idWorkflow)
+                                ->where('idUsuariRevisor', $request->idRevisor)
+                                ->update(['notesRevisor' => $request->notesRevisor]);
+
       // Comprovem que tothom hagi revisat el doc
+      // REVIEW aqui lo ideal sera fer una subquery per agrupar tots els estats
+      // que hi ha, pero de moment no es necessari
       $revisats = workflowRevisor::where('idWorkflow', $request->idWorkflow)
-                                 ->where('estat', '<>', 'Revisat')
-                                 // si es fica el seguent orWhere afecta als dos wheres anteriors
-                                 // ->orWhere('estat', '<>', 'Rebutjat')
-                                   ->count();
-      // dd($revisats);
+                                 ->where('estat', 'Nou')
+                                 ->count();
+
       if ($revisats == 0) {
         $canviWorkflow = Workflow::where('idWorkflow', $request->idWorkflow)
                                  ->update(['estat' => 'Revisat'], ['dataAprovacio' => date('Y-m-d H:i:s')]);
+
+        $canviWorkflow = Workflow::where('idWorkflow', $request->idWorkflow)
+                                 ->update(['dataAprovacio' => date('Y-m-d H:i:s')]);
 
       }
 
@@ -62,23 +95,97 @@ class CU_35Controller extends Controller
 
     public function rebutjarRevisarWorkflow(Request $request)
     {
+      // REVIEW hauria de ser aixi, pero nomes fa update del primer valor i no dels tres
+      // $revisio = workflowRevisor::where('idWorkflow', $request->idWorkflow)
+      //                           ->where('idUsuariRevisor', $request->idRevisor)
+      //                           ->update(['estat' => 'Rebutjat'], ['dataRebuig' => date('Y-m-d H:i:s')], ['notesRevisor' => $request->notesRevisor]);
+
       $revisio = workflowRevisor::where('idWorkflow', $request->idWorkflow)
                                 ->where('idUsuariRevisor', $request->idRevisor)
-                                ->update(['estat' => 'Rebutjat'], ['dataRebuig' => date('Y-m-d H:i:s')]);
-      // TODO canviar alguna altra taula
+                                ->update(['estat' => 'Rebutjat']);
+
+      $revisio = workflowRevisor::where('idWorkflow', $request->idWorkflow)
+                                ->where('idUsuariRevisor', $request->idRevisor)
+                                ->update(['dataRebuig' => date('Y-m-d H:i:s')]);
+
+      $revisio = workflowRevisor::where('idWorkflow', $request->idWorkflow)
+                                ->where('idUsuariRevisor', $request->idRevisor)
+                                ->update(['notesRevisor' => $request->notesRevisor]);
+
+      // Comprovem que tothom hagi revisat el doc
+      // REVIEW aqui lo ideal sera fer una subquery per agrupar tots els estats
+      // que hi ha, pero de moment no es necessari
+      $revisats = workflowRevisor::where('idWorkflow', $request->idWorkflow)
+                                 ->where('estat', 'Nou')
+                                 ->count();
+      if ($revisats == 0) {
+        $canviWorkflow = Workflow::where('idWorkflow', $request->idWorkflow)
+                                 ->update(['estat' => 'Revisat'], ['dataAprovacio' => date('Y-m-d H:i:s')]);
+
+        $canviWorkflow = Workflow::where('idWorkflow', $request->idWorkflow)
+                                 ->update(['dataAprovacio' => date('Y-m-d H:i:s')]);
+
+      }
+
+      return redirect('CU_35_MostrarWorkflows');
     }
 
     public function aprovarWorkflow(Request $request)
     {
+      // REVIEW hauria de ser aixi, pero nomes fa update del primer valor i no dels tres
+      // $revisio = Workflow::where('idWorkflow', $request->idWorkflow)
+      //                    ->update(['estat' => 'Aprovat'], ['dataAprovacio' => date('Y-m-d H:i:s')], ['notesAprovador' => $request->notesAprovador]);
+
       $revisio = Workflow::where('idWorkflow', $request->idWorkflow)
-                         ->update(['estat' => 'Aprovat'], ['dataAprovacio' => date('Y-m-d H:i:s')]);
-      // TODO canviar alguna altra taula
+                         ->update(['estat' => 'Aprovat']);
+
+      $revisio = Workflow::where('idWorkflow', $request->idWorkflow)
+                         ->update(['dataAprovacio' => date('Y-m-d H:i:s')]);
+
+      $revisio = Workflow::where('idWorkflow', $request->idWorkflow)
+                         ->update(['notesAprovador' => $request->notesAprovador]);
+
+      return redirect('CU_35_MostrarWorkflows');
     }
+
     public function rebutjarAprovarWorkflow(Request $request)
     {
+      // REVIEW hauria de ser aixi, pero nomes fa update del primer valor i no dels tres
+      // $revisio = Workflow::where('idWorkflow', $request->idWorkflow)
+      //                    ->update(['estat' => 'Rebutjat'], ['dataRebuig' => date('Y-m-d H:i:s')], ['notesAprovador' => $request->notesAprovador]);
+
       $revisio = Workflow::where('idWorkflow', $request->idWorkflow)
-                         ->update(['estat' => 'Rebutjat'], ['dataAprovacio' => date('Y-m-d H:i:s')]);
-      // TODO canviar alguna altra taula
+                         ->update(['estat' => 'Rebutjat']);
+
+      $revisio = Workflow::where('idWorkflow', $request->idWorkflow)
+                         ->update(['dataRebuig' => date('Y-m-d H:i:s')]);
+
+      $revisio = Workflow::where('idWorkflow', $request->idWorkflow)
+                         ->update(['notesAprovador' => $request->notesAprovador]);
+
+      return redirect('CU_35_MostrarWorkflows');
+    }
+
+    public function completarWorkflow($id)
+    {
+      $completar = Workflow::where('idWorkflow', $id)
+                           ->update(['estat' => 'Finalitzat']);
+
+      $completarRev = workflowRevisor::where('idWorkflow', $id)
+                                     ->update(['estat' => 'Finalitzat']);
+
+      return redirect('CU_35_MostrarWorkflows');
+    }
+
+    public function eliminarWorkflow($id)
+    {
+      $eliminar = Workflow::where('idWorkflow', $id)
+                          ->delete();
+
+      $eliminarRev = workflowRevisor::where('idWorkflow', $id)
+                                    ->delete();
+
+      return redirect('CU_35_MostrarWorkflows');
     }
 
 }
