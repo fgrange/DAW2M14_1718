@@ -28,6 +28,7 @@
 	            if(count($workflows) > 0){
 	              ?>
 				<tbody>
+					{{-- {{dd($workflows)}} --}}
 					@foreach($workflows as $workf)
 							<tr>
 								<td>{{ $workf->idWorkflow }}</td>
@@ -37,16 +38,17 @@
 								<td>{{ $workf->nom }}</td>
 								<td>{{ $workf->estat }}</td>
 								<td>
-
-									@if ($idRevisor->idUsuariRevisor==$_SESSION['idUsuari'])
-										@if($idRevisor->estat =='Nou' || $idRevisor->estat =='Examinant')
-											@include('CU_35_ModalRevisar', ['idW' => $workf->idWorkflow, 'idR' => $idRevisor->idUsuariRevisor])
+									@foreach($idRevisor as $revisor)
+										@if (($revisor->idUsuariRevisor==$_SESSION['idUsuari']) && ($revisor->idWorkflow == $workf->idWorkflow))
+											@if($revisor->estat =='Nou' || $revisor->estat =='Examinant')
+												@include('CU_35_ModalRevisar', ['idW' => $workf->idWorkflow, 'idR' => $revisor->idUsuariRevisor])
+											@endif
 										@endif
-									@endif
+									@endforeach
 
 									@if ($workf->idUsuariAprovador==$_SESSION['idUsuari'])
 										@if($workf->estat =='Revisat')
-											<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAprovar" data-id="{{ $workf->idUsuariAprovador }}">Aprovar</button>
+											@include('CU_35_ModalAprovar', ['idW' => $workf->idWorkflow])
 										@elseif($workf->estat =='Nou' || $workf->estat =='Examinant')
 											<button type="button" class="btn btn-secondary" disabled>Pendent de revisió</button>
 										@else

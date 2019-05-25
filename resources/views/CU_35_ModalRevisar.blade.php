@@ -13,13 +13,12 @@
 			</div>
 
 			<div class="modal-body">
-				<form method="POST" action="{{ url('/CU_35_RevisarWorkflow/'.$idR) }}">
+				<form method="POST" action="{{ url('/CU_35_RevisarWorkflow/') }}">
 					{{ csrf_field() }}
 					<input type="hidden" name="idWorkflow" id="id" value="{{$idW}}">
+					<input type="hidden" name="idRevisor" id="id" value="{{$idR}}">
 					<div class="form-group">
 						<h4>Estàs segur d'acceptar el document?</h4>
-						<h4>idRev: {{$idR}}</h4>
-						<h4>idWork: {{$idW}}</h4>
 					</div>
 			</div>
 
@@ -28,9 +27,10 @@
 					<button type="submit" class="btn btn-primary">
 						Acceptar document
 					</button>
-          <form method="POST" action="{{ url('/CU_35_RebutjarRevisarWorkflow/'.$idR) }}">
+          <form method="POST" action="{{ url('/CU_35_RebutjarRevisarWorkflow') }}">
   					{{ csrf_field() }}
 						<input type="hidden" name="idWorkflow" id="id" value="{{$idW}}">
+						<input type="hidden" name="idRevisor" id="id" value="{{$idR}}">
             <button type="submit" class="btn btn-danger">
   						Rebutjar document
   					</button>
