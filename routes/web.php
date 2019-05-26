@@ -196,6 +196,8 @@ Route::post('/CU_35_RebutjarRevisarWorkflow', 'CU_35Controller@rebutjarRevisarWo
 Route::post('/CU_35_AprovarWorkflow', 'CU_35Controller@aprovarWorkflow');
 Route::post('/CU_35_RebutjarAprovarWorkflow', 'CU_35Controller@rebutjarAprovarWorkflow');
 
+Route::post('/CU_35_ComprobarWorkflows', 'CU_35Controller@comprobarWorkflows');
+
 Route::post('/CU_35_CompletarWorkflow/{id}', 'CU_35Controller@completarWorkflow');
 Route::post('/CU_35_EliminarWorkflow/{id}', 'CU_35Controller@eliminarWorkflow');
 //

@@ -21,6 +21,8 @@ class CU_35Controller extends Controller
         $userAdmin = User::where('idUsuari', $id_Usuario)->first();
         // dd($userAdmin->tipus);
 
+        comprobarDates();
+
         if ($userAdmin->tipus == 'Administrador') {
           $workflows = Workflow::select('workflows.*', 'documents.*')
               ->join('revisorworkflows', function ($join) {
@@ -52,6 +54,39 @@ class CU_35Controller extends Controller
         // dd($user);
 
         return view('CU_35_Mostrar')->with('workflows', $workflows)->with('idUsuari', $id_Usuario)->with('idRevisor', $user);
+    }
+
+    public function comprobarDates()
+    {
+      $workflows = Workflow::select('workflows.*', 'documents.*')
+          ->join('revisorworkflows', function ($join) {
+                  $join->on('revisorworkflows.idWorkflow', '=', 'workflows.idWorkflow');
+              })
+          ->join('documents', function ($join2) {
+                  $join2->on('documents.idDocument', '=', 'workflows.idDocument');
+              })
+          ->get();
+
+      $now = date('Y-m-d H:i:s');
+      $notesAutoAprov = 'Rebuig automàtic: data límit d\'aprovació superada.';
+      $notesAutoAprov = 'Rebuig automàtic: data límit de revisió superada.';
+      $revisioRebutjada = false;
+
+      // TODO comprobar revisions una per una
+      
+      foreach ($workflows as $workflow) {
+        if ($workflow->dataLimitAprovacio < $date || $revisioRebutjada) {
+          $wf = Workflow::where('idWorkflow', $workflow->idWorkflow)
+                        ->update(['estat' => 'Rebutjat']);
+
+          $wf = Workflow::where('idWorkflow', $workflow->idWorkflow)
+                        ->update(['dataAprovacio' => date('Y-m-d H:i:s')]);
+
+          $wf = Workflow::where('idWorkflow', $workflow->idWorkflow)
+                        ->update(['notesAprovador' => $request->notesAutoAprov]);
+
+        }
+      }
     }
 
     public function revisarWorkflow(Request $request)
