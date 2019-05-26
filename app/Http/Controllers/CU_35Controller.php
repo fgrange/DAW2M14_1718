@@ -69,13 +69,33 @@ class CU_35Controller extends Controller
 
       $now = date('Y-m-d H:i:s');
       $notesAutoAprov = 'Rebuig automàtic: data límit d\'aprovació superada.';
-      $notesAutoAprov = 'Rebuig automàtic: data límit de revisió superada.';
-      $revisioRebutjada = false;
+      $notesAutoRev = 'Rebuig automàtic: data límit de revisió superada.';
 
-      // TODO comprobar revisions una per una
-      
+      // Comprovem primer l'estat de les revisions
       foreach ($workflows as $workflow) {
-        if ($workflow->dataLimitAprovacio < $date || $revisioRebutjada) {
+        if ($workflow->dataLimitRevisio < $date) {
+
+          // Modifiquem totes les revisions amb data passada
+          $wfrevisor = workflowRevisor::where('idWorkflow', $workflow->idWorkflow)
+                                      ->update(['estat' => 'Rebutjat']);
+
+          $wfrevisor = workflowRevisor::where('idWorkflow', $workflow->idWorkflow)
+                                      ->update(['dataRevisio' => date('Y-m-d H:i:s')]);
+
+          $wfrevisor = workflowRevisor::where('idWorkflow', $workflow->idWorkflow)
+                                      ->update(['notesRevisor' => $request->notesAutoRev]);
+
+          // Modifiquem el workflow i el marquem com a rebutjat
+          $wf = Workflow::where('idWorkflow', $workflow->idWorkflow)
+                        ->update(['estat' => 'Rebutjat']);
+
+        }
+      }
+
+      // Comprovem l'estat de les aprovacions
+      foreach ($workflows as $workflow) {
+        if ($workflow->dataLimitAprovacio < $date) {
+          // Modifiquem el workflow amb data d'aprovacio passada
           $wf = Workflow::where('idWorkflow', $workflow->idWorkflow)
                         ->update(['estat' => 'Rebutjat']);
 
@@ -84,7 +104,6 @@ class CU_35Controller extends Controller
 
           $wf = Workflow::where('idWorkflow', $workflow->idWorkflow)
                         ->update(['notesAprovador' => $request->notesAutoAprov]);
-
         }
       }
     }
