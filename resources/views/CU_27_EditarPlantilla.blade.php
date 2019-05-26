@@ -15,7 +15,7 @@
               {{ csrf_field() }}
 
                     <div class="form-group">
-                        <label for="title">Nombre</label>
+                        <label for="title">Nom</label>
                         <input type="text" name="nomPlantilla" id="nomPlantilla" value="{{$plantillas->nomPlantilla}}">
                     </div>
                     <label for="Aprovador">Aprovador Actual</label>
