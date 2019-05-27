@@ -19,7 +19,6 @@ class CU_35Controller extends Controller
         $id_Usuario = $_SESSION['idUsuari'];
 
         $userAdmin = User::where('idUsuari', $id_Usuario)->first();
-        // dd($userAdmin->tipus);
 
         // ##########################
         // Comprovar dates
@@ -103,12 +102,12 @@ class CU_35Controller extends Controller
 
           $user = workflowRevisor::where('idUsuariRevisor', '=', $id_Usuario)->get();
         }
-
+        // dd($userAdmin->tipus);
 
 
         // dd($user);
 
-        return view('CU_35_Mostrar')->with('workflows', $workflows)->with('idUsuari', $id_Usuario)->with('idRevisor', $user);
+        return view('CU_35_Mostrar')->with('workflows', $workflows)->with('usuari', $userAdmin)->with('idRevisor', $user);
     }
 
     // public function comprovarDates()

@@ -38,8 +38,7 @@
 								<td>{{ $workf->nom }}</td>
 								<td>{{ $workf->estat }}</td>
 								<td>
-
-									@if ($idRevisor->tipus != 'Administrador')
+									@if ($usuari->tipus != 'Administrador')
 										@foreach($idRevisor as $revisor)
 											@if (($revisor->idUsuariRevisor==$_SESSION['idUsuari']) && ($revisor->idWorkflow == $workf->idWorkflow))
 												@if($revisor->estat =='Nou' || $revisor->estat =='Examinant')
@@ -57,13 +56,13 @@
 											@endif
 										@endif
 
-										@if($workf->idUsuariCreacio==$idUsuari)
+										@if($workf->idUsuariCreacio==$usuari->idUsuari)
 											@if ($workf->estat =='Finalitzat')
 												<a class="btn btn-default" href="{{url('/forcarWorkflow')}}">Completar</a>
 											@endif
 										@endif
 
-										@if($workf->idUsuariCreacio==$idUsuari)
+										@if($workf->idUsuariCreacio==$usuari->idUsuari)
 											<a class="btn btn-danger" href="{{url('/deleteWorkflow/'.$workf->idWorkflow)}}">Eliminar</a>
 										@endif
 
