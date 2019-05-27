@@ -72,6 +72,22 @@
 
 									{{-- if admin --}}
 									@else
+										@foreach($idRevisor as $revisor)
+											@if (($revisor->idUsuariRevisor==$_SESSION['idUsuari']) && ($revisor->idWorkflow == $workf->idWorkflow))
+												@if($revisor->estat =='Nou' || $revisor->estat =='Examinant')
+													@include('CU_35_ModalRevisar', ['idW' => $workf->idWorkflow, 'idR' => $revisor->idUsuariRevisor])
+												@endif
+											@endif
+										@endforeach
+
+										@if ($workf->idUsuariAprovador==$_SESSION['idUsuari'])
+											@if($workf->estat =='Revisat')
+												@include('CU_35_ModalAprovar', ['idW' => $workf->idWorkflow])
+											@elseif($workf->estat =='Nou' || $workf->estat =='Examinant')
+												<button type="button" class="btn btn-secondary" disabled>Pendent de revisió</button>
+											@else
+											@endif
+										@endif
 										<a class="btn btn-default" href="{{url('/forcarWorkflow')}}">Completar</a>
 										<a class="btn btn-danger" href="{{url('/deleteWorkflow/'.$workf->idWorkflow)}}">Eliminar</a>
 										<a class="btn btn-warning" href="{{url('/descarregaWorkflow/'.$workf->idDocument)}}">Descarregar</a>
