@@ -25,15 +25,18 @@
 					<button type="submit" class="btn btn-success">
 						Aprovar document
 					</button>
-          <form method="POST" action="{{ url('/CU_35_RebutjarAprovarWorkflow') }}">
-  					{{ csrf_field() }}
-						<input type="hidden" name="idWorkflow" id="id" value="{{$idW}}">
-            <button type="submit" class="btn btn-danger">
-  						Rebutjar document
-  					</button>
-          </form>
 				</div>
 			</div>
+			</form>
+			<form method="POST" action="{{ url('/CU_35_RebutjarAprovarWorkflow') }}"
+			style="position: absolute;
+						 bottom: 14px;
+						 left: 15px">
+			{{ csrf_field() }}
+				<input type="hidden" name="idWorkflow" value="{{$idW}}">
+				<button type="submit" class="btn btn-danger">
+					Rebutjar document
+				</button>
 			</form>
 		</div>
 	</div>

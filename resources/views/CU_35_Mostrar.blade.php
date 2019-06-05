@@ -57,8 +57,8 @@
 										@endif
 
 										@if($workf->idUsuariCreacio==$usuari->idUsuari)
-											@if ($workf->estat =='Finalitzat')
-												<a class="btn btn-default" href="{{url('/forcarWorkflow')}}">Completar</a>
+											@if ($workf->estat !='Finalitzat' && $workf->estat !='Rebutjat')
+												<a class="btn btn-default" href="{{url('/CU_35_CompletarWorkflow/'.$workf->idWorkflow)}}">Completar</a>
 											@endif
 										@endif
 
@@ -88,7 +88,9 @@
 											@else
 											@endif
 										@endif
-										<a class="btn btn-default" href="{{url('/forcarWorkflow')}}">Completar</a>
+										@if ($workf->estat !='Finalitzat' && $workf->estat !='Rebutjat')
+											<a class="btn btn-default" href="{{url('/CU_35_CompletarWorkflow/'.$workf->idWorkflow)}}">Completar</a>
+										@endif
 										<a class="btn btn-danger" href="{{url('/deleteWorkflow/'.$workf->idWorkflow)}}">Eliminar</a>
 										<a class="btn btn-warning" href="{{url('/descarregaWorkflow/'.$workf->idDocument)}}">Descarregar</a>
 									@endif

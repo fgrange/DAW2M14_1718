@@ -198,8 +198,7 @@ Route::post('/CU_35_RebutjarAprovarWorkflow', 'CU_35Controller@rebutjarAprovarWo
 
 Route::post('/CU_35_ComprobarWorkflows', 'CU_35Controller@comprobarWorkflows');
 
-Route::post('/CU_35_CompletarWorkflow/{id}', 'CU_35Controller@completarWorkflow');
-Route::post('/CU_35_EliminarWorkflow/{id}', 'CU_35Controller@eliminarWorkflow');
+Route::get('/CU_35_CompletarWorkflow/{id}', 'CU_35Controller@completarWorkflow');
 //
 //
 // CU36 Gestionar Grupos (Oscar y Carlos)

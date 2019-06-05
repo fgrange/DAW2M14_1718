@@ -48,20 +48,25 @@
       </select>
     </div>
 
-    <div class="form-group" id="datepicker">
+    <div class="form-group {{isset($invalido) ? ' has-error' : '' }}" id="datepicker">
       <label class="control-label" for="date">Data límit de revisió:</label>
       <div class="input-group date" name="date" >
         <span class="input-group-addon"><i class="fas fa-calendar-alt"></i></span>
-        <input class="form-control" name="dataRevi" placeholder="DD-MM-YYYY" type="text"/>
+        <input class="form-control" name="dataRevi" placeholder="DD-MM-YYYY" type="text" required/>
       </div>
     </div>
 
-    <div class="form-group" id="datepicker">
+    <div class="form-group {{isset($invalido) ? ' has-error' : '' }}" id="datepicker">
       <label class="control-label" for="date">Data límit d'aprovació:</label>
       <div class="input-group date" name="date" >
         <span class="input-group-addon"><i class="fas fa-calendar-alt"></i></span>
-        <input class="form-control" name="dataAprov" placeholder="DD-MM-YYYY" type="text"/>
+        <input class="form-control" name="dataAprov" placeholder="DD-MM-YYYY" type="text" required/>
       </div>
+      @if (isset($invalido))
+           <span class="help-block">
+               <strong>{{$invalido}}</strong>
+           </span>
+       @endif
     </div>
 
     <div class="form-group">
